@@ -1,0 +1,13 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.container {
+	width: 100%;
+	max-width: $breakpoint-xl;
+	margin: 0 auto;
+	padding: 0 $spacing-md;
+
+	@include respond-to(md) {
+		padding: 0 $spacing-xl;
+	}
+}

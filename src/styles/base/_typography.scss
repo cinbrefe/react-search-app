@@ -1,0 +1,18 @@
+@use '../abstracts/variables' as *;
+
+body {
+	font-family: $font-family-base;
+	font-size: $font-size-base;
+	color: $color-text;
+	background-color: $color-background;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1.2;
+	font-weight: 700;
+}
+
+h1 { font-size: $font-size-2xl; }
+h2 { font-size: $font-size-xl; }
+h3 { font-size: $font-size-lg; }
+h4 { font-size: $font-size-md; }

@@ -1,0 +1,21 @@
+@use '../../styles/abstracts/variables' as *;
+
+.card {
+	background-color: $color-white;
+	border-radius: $border-radius-md;
+	box-shadow: $shadow-md;
+	padding: $spacing-md;
+	text-align: center;
+
+	img {
+		width: 120px;
+		height: 120px;
+		margin: 0 auto;
+	}
+
+	h2 {
+		text-transform: capitalize;
+		font-size: $font-size-lg;
+		margin: $spacing-sm 0;
+	}
+}
