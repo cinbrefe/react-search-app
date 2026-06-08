@@ -15,10 +15,7 @@ const useFetch = (url) => {
 	const [state, dispatch] = useReducer(reducer, initialState)
 
 	useEffect(() => {
-		if (!url) {
-			dispatch({ type: 'FETCH_START' })
-			return
-		}
+		if (!url) return
 		dispatch({ type: 'FETCH_START' })
 		fetch(url)
 			.then(res => res.json())
