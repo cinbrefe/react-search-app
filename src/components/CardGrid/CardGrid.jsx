@@ -1,10 +1,12 @@
 import './CardGrid.scss'
 import Card from '../Card/Card'
 import useFetch from '../../hooks/useFetch'
-import { API_BASE_URL } from '../../constants/api'
+import { API_BASE_URL, DEFAULT_LIMIT } from '../../constants/api'
 
 export default function CardGrid({ query, onSelect }) {
-	const url = query ? `${API_BASE_URL}/artworks/search?q=${query}` : `${API_BASE_URL}/artworks`
+	const url = query 
+		 ? `${API_BASE_URL}/artworks/search?q=${query}&limit=${DEFAULT_LIMIT}&fields=id,title,artist_title,image_id`
+		 : `${API_BASE_URL}/artworks?limit=${DEFAULT_LIMIT}&query[term][is_public_domain]=true` 
 	const { data, loading, error } = useFetch(url)
 
 	if (loading) return <p>Loading...</p>
@@ -13,7 +15,7 @@ export default function CardGrid({ query, onSelect }) {
 
 	return (
 		<div className="card-grid">
-			{data.data.map(artwork => (
+			{data.data.filter(artwork => artwork.image_id).map(artwork => (
 				<Card 
 					key={artwork.id} 
 					title={artwork.title} 
