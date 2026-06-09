@@ -7,11 +7,11 @@ import Modal from './components/ui/Modal'
 import ArtworkDetails from './components/ArtworkDetails/ArtworkDetails'
 
 function App() {
-	const [query, setQuery] = useState('');
-	const [selectedId, setSelectedId] = useState(null);
+	const [query, setQuery] = useState('')
+	const [selectedId, setSelectedId] = useState(null)
 
 	function handleSelect(id) {
-		setSelectedId(id);
+		setSelectedId(id)
 	}
 
 	return (

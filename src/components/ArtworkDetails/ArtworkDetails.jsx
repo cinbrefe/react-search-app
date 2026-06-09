@@ -8,7 +8,7 @@ export default function ArtworkDetails({ id }) {
 	if (error) return <p>Error: {error.message}</p>
 	if (!data || !data.data) return <p>No results found.</p>
 	
-	const { image_id, title, artist_title, date_display, medium_display } = data.data;
+	const { image_id, title, artist_title, date_display, medium_display } = data.data
 
 	return (
 		<div className="artwork-details">

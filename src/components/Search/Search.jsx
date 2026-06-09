@@ -4,11 +4,11 @@ export default function Search({ onSearch }) {
 	const inputRef = useRef()
 
 	function handleSubmit(e) {
-		e.preventDefault();
-		const query = inputRef.current.value.trim().toLowerCase();
+		e.preventDefault()
+		const query = inputRef.current.value.trim().toLowerCase()
 
 		// Pass the search query to the parent component (lift state up)
-		onSearch(query);
+		onSearch(query)
 	}
 
 	return (
