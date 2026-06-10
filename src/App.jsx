@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Header from './components/Header/Header'
 import Search from './components/Search/Search'
 import CardGrid from './components/CardGrid/CardGrid'
-import Modal from './components/ui/Modal'
+import Modal from './components/ui/Modal/Modal'
 import ArtworkDetails from './components/ArtworkDetails/ArtworkDetails'
 
 function App() {
