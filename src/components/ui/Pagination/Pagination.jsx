@@ -1,8 +1,8 @@
 // Windowed pagination component
 // Props:
-//   currentPage  - the current active page (number)
-//   totalPages   - total number of pages available (number)
-//   onPageChange - callback fired with the new page number when user navigates
+//	currentPage - the current active page (number)
+//	totalPages  - total number of pages available (number)
+//	onPageChange - callback fired with the new page number when user navigates
 
 export default function Pagination({ currentPage, totalPages, onPageChange }) {
 
