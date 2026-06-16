@@ -4,52 +4,65 @@ import './CardGrid.scss'
 import Card from '../Card/Card'
 import Pagination from '../ui/Pagination/Pagination'
 import useFetch from '../../hooks/useFetch'
-import { API_BASE_URL, DEFAULT_LIMIT } from '../../constants/api'
+import { API_BASE_URL, TMDB_API_KEY } from '../../constants/api'
+
+function buildDiscoverParams(filters, page, apiKey) {
+	const params = new URLSearchParams({
+		api_key: apiKey,
+		page,
+	})
+	params.set('sort_by', filters?.sortBy || 'popularity.desc')
+	if (filters?.genres?.length > 0) params.set('with_genres', filters.genres.join(',')) 
+	if (filters?.ratingFilter) {
+		params.set('vote_average.gte', filters.ratingFilter)
+		params.set('vote_count.gte', 100)
+	}
+	if (filters?.yearFrom) params.set('primary_release_date.gte', `${filters.yearFrom}-01-01`)
+	if (filters?.yearTo) params.set('primary_release_date.lte', `${filters.yearTo}-12-31`)
+	return params.toString()
+}
 
 export default function CardGrid({ query, filters, onSelect }) {
 	const [currentPage, setCurrentPage] = useState(1)
 	const [prevQuery, setPrevQuery] = useState(query)
+	const [prevFilters, setPrevFilters] = useState(filters)
 
-	// Reset to first page when query changes
 	if (prevQuery !== query) {
 		setPrevQuery(query)
 		setCurrentPage(1)
 	}
 
+	if (prevFilters !== filters) {
+		setPrevFilters(filters)
+		setCurrentPage(1)
+	}
+
 	const url = query
-		? `${API_BASE_URL}/artworks/search?q=${query}&limit=${DEFAULT_LIMIT}&fields=id,title,artist_title,image_id,artwork_type_title,place_of_origin,date_start,date_end&page=${currentPage}`
-		: `${API_BASE_URL}/artworks?limit=${DEFAULT_LIMIT}&fields=id,title,artist_title,image_id,artwork_type_title,place_of_origin,date_start,date_end&query[term][is_public_domain]=true&page=${currentPage}`
+		? `${API_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&page=${currentPage}`
+		: `${API_BASE_URL}/discover/movie?${buildDiscoverParams(filters, currentPage, TMDB_API_KEY)}`
 
 	const { data, loading, error } = useFetch(url)
 
 	if (loading) return <p>Loading...</p>
 	if (error) return <p>Error: {error.message}</p>
-	if (!data || !data.data || data.data.length === 0) return <p>No results found.</p>
+	if (!data || !data.results || data.results.length === 0) return <p>No results found.</p>
 
-	// Apply filters client-side
-	const artworks = data.data.filter(artwork => {
-		if (!artwork.image_id) return false
-		if (filters?.artwork_type_title?.length > 0 && !filters.artwork_type_title.includes(artwork.artwork_type_title)) return false
-		if (filters?.place_of_origin?.length > 0 && !filters.place_of_origin.includes(artwork.place_of_origin)) return false
-		if (filters?.dateFrom && artwork.date_start < Number(filters.dateFrom)) return false
-		if (filters?.dateTo && artwork.date_end > Number(filters.dateTo)) return false
-		return true
-	})
+	const movies = data.results.filter(movie => movie.poster_path)
 
 	return (
 		<div className="card-grid">
-			{artworks.map(artwork => (
+			{movies.map(movie => (
 				<Card
-					key={artwork.id}
-					title={artwork.title}
-					artist_title={artwork.artist_title}
-					image_id={artwork.image_id}
-					onSelect={() => onSelect(artwork.id)}
+					key={movie.id}
+					title={movie.title}
+					release_date={movie.release_date}
+					poster_path={movie.poster_path}
+					onSelect={() => onSelect(movie.id)}
 				/>
 			))}
 			<Pagination
 				currentPage={currentPage}
-				totalPages={data.pagination?.total_pages || 1}
+				totalPages={Math.min(data.total_pages || 1, 500)}
 				onPageChange={setCurrentPage}
 			/>
 		</div>

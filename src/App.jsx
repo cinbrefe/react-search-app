@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import Header from './components/layout/Header/Header'
-import Search from './components/Search/Search'
+import Search from './components/ui/Search/Search'
 import FilterSidebar from './components/layout/FilterSidebar/FilterSidebar'
 import CardGrid from './components/CardGrid/CardGrid'
 import Modal from './components/ui/Modal/Modal'
@@ -25,7 +25,7 @@ function App() {
 			<main>
 				<Search onSearch={setQuery} />
 				<div style={{ display: 'flex' }}>
-					<FilterSidebar onFilter={setFilters} />
+					<FilterSidebar onFilter={setFilters} disabled={!!query} onClearSearch={() => setQuery('')} />
 					<CardGrid query={query} filters={filters} onSelect={handleSelect} />
 				</div>
 			</main>

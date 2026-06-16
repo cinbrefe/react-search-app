@@ -1,11 +1,12 @@
 import './Card.scss'
+import { IMAGE_BASE_URL } from '../../constants/api'
 
-export default function Card({ title, artist_title, image_id, onSelect }) {
+export default function Card({ title, release_date, poster_path, onSelect }) {
 	return (
 		<button className="card" onClick={onSelect}>
-			<img src={`https://www.artic.edu/iiif/2/${image_id}/full/400,/0/default.jpg`} alt={title} />
+			<img src={`${IMAGE_BASE_URL}${poster_path}`} alt={title} />
 			<h2>{title}</h2>
-			<p>{artist_title}</p>
+			<p>{release_date?.slice(0, 4)}</p>
 		</button>
 	)
 }
