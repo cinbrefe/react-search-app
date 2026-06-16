@@ -10,7 +10,6 @@ export default function GenreFilter({ value, onChange }) {
 
 	return (
 		<div className="filter-group">
-			<h3>Genre</h3>
 			<form>
 				{GENRES.map(genre => (
 					<Checkbox

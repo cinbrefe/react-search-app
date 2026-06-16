@@ -9,7 +9,6 @@ export default function RatingFilter({ value, onChange }) {
 
 	return (
 		<div className="filter-group">
-			<h3>Rating</h3>
 			<form>
 				{RATINGS.map(r => (
 					<Checkbox

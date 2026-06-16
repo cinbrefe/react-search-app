@@ -8,7 +8,6 @@ export default function SortFilter({ value, onChange }) {
 
 	return (
 		<div className="filter-group">
-			<h3>Sort</h3>
 			<form>
 				<label>
 					Sort by:

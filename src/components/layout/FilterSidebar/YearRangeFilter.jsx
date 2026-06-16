@@ -17,7 +17,6 @@ export default function YearRangeFilter({ value, onChange }) {
 
 	return (
 		<div className="filter-group">
-			<h3>Year Range</h3>
 			<label>
 				From
 				<input type="number" placeholder="e.g. 2000" defaultValue={value.yearFrom} onChange={handleFromChange} />

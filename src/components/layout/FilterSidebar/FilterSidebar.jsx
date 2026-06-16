@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Accordion from '../../ui/Accordion/Accordion'
 import SortFilter from './SortFilter'
 import GenreFilter from './GenreFilter'
 import RatingFilter from './RatingFilter'
@@ -45,9 +46,15 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 			<fieldset disabled={disabled} style={{ border: 'none', padding: 0, margin: 0 }}>
 				{hasActiveFilters && <button type="button" onClick={handleResetFilters}>Reset Filters</button>}
 				<SortFilter value={filters.sortBy} onChange={value => handleFilterChange('sortBy', value)} />
-				<GenreFilter value={filters.genres} onChange={value => handleFilterChange('genres', value)} />
-				<RatingFilter value={filters.ratingFilter} onChange={value => handleFilterChange('ratingFilter', value)} />
-				<YearRangeFilter value={{ yearFrom: filters.yearFrom, yearTo: filters.yearTo }} onChange={handleYearRangeChange} />
+				<Accordion title="Genre">
+					<GenreFilter value={filters.genres} onChange={value => handleFilterChange('genres', value)} />	
+				</Accordion>
+				<Accordion title="Rating">
+					<RatingFilter value={filters.ratingFilter} onChange={value => handleFilterChange('ratingFilter', value)} />
+				</Accordion>
+				<Accordion title="Year Range">
+					<YearRangeFilter value={{ yearFrom: filters.yearFrom, yearTo: filters.yearTo }} onChange={handleYearRangeChange} />
+				</Accordion>
 			</fieldset>
 		</aside>
 	)
