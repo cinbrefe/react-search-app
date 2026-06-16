@@ -3,9 +3,9 @@ import { useState } from 'react'
 import Header from './components/layout/Header/Header'
 import Search from './components/ui/Search/Search'
 import FilterSidebar from './components/layout/FilterSidebar/FilterSidebar'
-import CardGrid from './components/CardGrid/CardGrid'
+import CardGrid from './components/features/CardGrid/CardGrid'
 import Modal from './components/ui/Modal/Modal'
-import ArtworkDetails from './components/ArtworkDetails/ArtworkDetails'
+import CardDetails from './components/features/CardDetails/CardDetails'
 
 function App() {
 	const [query, setQuery] = useState('')
@@ -19,7 +19,7 @@ function App() {
 	return (
 		<>
 			<Modal isOpen={selectedId !== null} onClose={() => setSelectedId(null)} buttonCaption="Close">
-				<ArtworkDetails id={selectedId} />
+				<CardDetails id={selectedId} />
 			</Modal>
 			<Header />
 			<main>
