@@ -1,5 +1,5 @@
-import useFetch from '../../hooks/useFetch'
-import { API_BASE_URL, IMAGE_BASE_URL, TMDB_API_KEY } from '../../constants/api'
+import useFetch from '../../../hooks/useFetch'
+import { API_BASE_URL, IMAGE_BASE_URL, TMDB_API_KEY } from '../../../constants/api'
 
 export default function CardDetails({ id }) {
 	const { data, loading, error } = useFetch(id ? `${API_BASE_URL}/movie/${id}?api_key=${TMDB_API_KEY}` : null)
