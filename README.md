@@ -17,6 +17,20 @@ A movie search and discovery app where you can explore popular films, search by 
 - Sass
 - TMDB API
 
+## Linting
+
+This project uses ESLint with the following plugins:
+
+- `eslint-plugin-react` — React-specific linting rules
+- `eslint-plugin-react-hooks` — enforces React hooks rules
+- `eslint-plugin-jsx-a11y` — accessibility checks for JSX elements
+
+To run the linter:
+
+```bash
+npx eslint src/
+```
+
 ## Path Aliases
 
 This project uses the `@` alias to reference the `src/` directory, avoiding brittle relative imports:
