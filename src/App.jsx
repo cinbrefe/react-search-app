@@ -23,7 +23,7 @@ function App() {
 				<SortBar value={filters.sortBy} onChange={handleSortChange} />
 				<div style={{ display: 'flex' }}>
 					<FilterSidebar onFilter={setFilters} disabled={!!query} onClearSearch={handleClearSearch} />
-					<CardGrid query={query} filters={filters} onSelect={setSelectedId} />
+					<CardGrid key={`${query}-${JSON.stringify(filters)}`} query={query} filters={filters} onSelect={setSelectedId} />
 				</div>
 			</main>
 		</ErrorBoundary>

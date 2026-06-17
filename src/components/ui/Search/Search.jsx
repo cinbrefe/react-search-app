@@ -14,10 +14,12 @@ export default function Search({ onSearch }) {
 
 	return (
 		<form onSubmit={handleSubmit}>
+		 	<label htmlFor='search-input' className='visually-hidden'>Search movies</label>  
 			<Input
-				type='text'
+				id='search-input'
 				placeholder='Search for movies...'
 				ref={inputRef}
+				type='text'
 			/>
 			<button type='submit'>Search</button>
 		</form>

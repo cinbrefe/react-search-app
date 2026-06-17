@@ -17,13 +17,13 @@ export default function YearRangeFilter({ value, onChange }) {
 
 	return (
 		<div className='filter-group'>
-			<label>
+			<label htmlFor='year-from'>
 				From
-				<input type='number' placeholder='e.g. 2000' defaultValue={value.yearFrom} onChange={handleFromChange} />
+				<input id='year-from' type='number' placeholder='e.g. 2000' min='1900' max={new Date().getFullYear()} defaultValue={value.yearFrom} onChange={handleFromChange} />
 			</label>
-			<label>
+			<label htmlFor='year-to'>
 				To
-				<input type='number' placeholder='e.g. 2024' defaultValue={value.yearTo} onChange={handleToChange} />
+				<input id='year-to' type='number' placeholder='e.g. 2024' min='1900' max={new Date().getFullYear()} defaultValue={value.yearTo} onChange={handleToChange} />
 			</label>
 		</div>
 	)

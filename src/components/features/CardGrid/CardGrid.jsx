@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import './CardGrid.scss'
 import Card from '@/components/features/Card/Card'
 import Pagination from '@/components/ui/Pagination/Pagination'
 import useFetch from '@/hooks/useFetch'
 import { API_BASE_URL, TMDB_API_KEY } from '@/constants/api'
+import Loading from '@/components/ui/Loading/Loading'
 
 function buildDiscoverParams(filters, page, apiKey) {
 	const params = new URLSearchParams({
@@ -25,19 +26,15 @@ function buildDiscoverParams(filters, page, apiKey) {
 export default function CardGrid({ query, filters, onSelect }) {
 	const [currentPage, setCurrentPage] = useState(1)
 
-	useEffect(() => {
-		setCurrentPage(1)
-	}, [query, filters])
-
 	const url = query
 		? `${API_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&page=${currentPage}`
 		: `${API_BASE_URL}/discover/movie?${buildDiscoverParams(filters, currentPage, TMDB_API_KEY)}`
 
 	const { data, loading, error } = useFetch(url)
 
-	if (loading) return <p>Loading...</p>
+	if (loading) return <Loading message={query ? `Searching for "${query}"...` : 'Loading movies...'} />
 	if (error) return <p>Error: {error.message}</p>
-	if (!data || !data.results || data.results.length === 0) return <p>No results found.</p>
+	if (!data?.results?.length) return <p>{query ? `No results found for "${query}"` : 'No movies available.'}</p>
 
 	const movies = data.results.filter(movie => movie.poster_path)
 
