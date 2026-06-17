@@ -1,5 +1,6 @@
 import { useAppState } from '@/hooks/useAppState'
 
+import ErrorBoundary from '@/components/ui/ErrorBoundary/ErrorBoundary'
 import Header from '@/components/layout/Header/Header'
 import Search from '@/components/ui/Search/Search'
 import SortBar from '@/components/ui/SortBar/SortBar'
@@ -12,7 +13,7 @@ function App() {
 	const { query, setQuery, filters, setFilters, selectedId, setSelectedId, handleSortChange, handleClearSearch } = useAppState()
 
 	return (
-		<>
+		<ErrorBoundary>
 			<Modal isOpen={selectedId !== null} onClose={() => setSelectedId(null)} buttonCaption='Close'>
 				<CardDetails id={selectedId} />
 			</Modal>
@@ -25,7 +26,7 @@ function App() {
 					<CardGrid query={query} filters={filters} onSelect={setSelectedId} />
 				</div>
 			</main>
-		</>
+		</ErrorBoundary>
 	)
 }
 

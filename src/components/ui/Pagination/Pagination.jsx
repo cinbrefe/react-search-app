@@ -11,10 +11,10 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 	const canGoNext = currentPage < totalPages
 	const canJumpForward = currentPage + 10 <= totalPages
 
-	// Builds a list of up to 10 page numbers centered around the current page
+	// Builds a list of up to 5 page numbers centered around the current page
 	function buildPageList() {
 		const start = Math.max(1, currentPage - 4)
-		const end = Math.min(start + 9, totalPages)
+		const end = Math.min(start + 4, totalPages)
 		const pages = []
 		for (let i = start; i <= end; i++) {
 			pages.push(i)
@@ -25,19 +25,27 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 	function handlePrev() { onPageChange(currentPage - 1) }
 	function handleNext() { onPageChange(currentPage + 1) }
 	// Jumps forward 10 pages at a time
-	function handleJumpForward() { onPageChange(currentPage + 10) }
+	function handleJumpForward() { onPageChange(currentPage + 5) }
 
 	return (
-		<div className="pagination">
-			<button onClick={handlePrev} disabled={!canGoPrev}>
+		<nav aria-label='Pagination' className='pagination'>
+			<button
+				aria-label='Go to previous page'
+				disabled={!canGoPrev}
+				onClick={handlePrev}
+				type='button'
+			>
 				Previous
 			</button>
 
 			{buildPageList().map(page => (
 				<button
 					key={page}
-					onClick={() => onPageChange(page)}
+					type='button'
 					disabled={page === currentPage}
+					aria-label={page === currentPage ? `Page ${page}, current page` : `Go to page ${page}`}
+					aria-current={page === currentPage ? 'page' : undefined}
+					onClick={() => onPageChange(page)}
 				>
 					{page}
 				</button>
@@ -45,15 +53,22 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 
 			{/* Jump forward 10 pages, hidden when near the end */}
 			<button
+				type='button'
+				aria-label='Jump forward 5 pages'
 				onClick={handleJumpForward}
 				disabled={!canJumpForward}
 			>
 				...
 			</button>
 
-			<button onClick={handleNext} disabled={!canGoNext}>
+			<button
+				aria-label='Go to next page'
+				disabled={!canGoNext}
+				onClick={handleNext}
+				type='button'
+			>
 				Next
 			</button>
-		</div>
+		</nav>
 	)
 }

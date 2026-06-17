@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import './CardGrid.scss'
 import Card from '@/components/features/Card/Card'
@@ -24,18 +24,10 @@ function buildDiscoverParams(filters, page, apiKey) {
 
 export default function CardGrid({ query, filters, onSelect }) {
 	const [currentPage, setCurrentPage] = useState(1)
-	const [prevQuery, setPrevQuery] = useState(query)
-	const [prevFilters, setPrevFilters] = useState(filters)
 
-	if (prevQuery !== query) {
-		setPrevQuery(query)
+	useEffect(() => {
 		setCurrentPage(1)
-	}
-
-	if (prevFilters !== filters) {
-		setPrevFilters(filters)
-		setCurrentPage(1)
-	}
+	}, [query, filters])
 
 	const url = query
 		? `${API_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&page=${currentPage}`
