@@ -1,7 +1,11 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 
 export default function YearRangeFilter({ value, onChange }) {
 	const debounceRef = useRef(null)
+
+	useEffect(() => {
+		return () => clearTimeout(debounceRef.current)
+	}, [])
 
 	function handleFromChange(event) {
 		const yearFrom = event.target.value

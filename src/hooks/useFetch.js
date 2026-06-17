@@ -16,11 +16,19 @@ const useFetch = (url) => {
 
 	useEffect(() => {
 		if (!url) return
+		const controller = new AbortController()
 		dispatch({ type: 'FETCH_START' })
-		fetch(url)
-			.then(res => res.json())
+		fetch(url, { signal: controller.signal })
+			.then(res => {
+				if (!res.ok) throw new Error(`Request failed with status ${res.status}`)
+				return res.json()
+			})
 			.then(data => dispatch({ type: 'FETCH_SUCCESS', payload: data }))
-			.catch(err => dispatch({ type: 'FETCH_ERROR', payload: err }))
+			.catch(err => {
+				if (err.name === 'AbortError') return
+				dispatch({ type: 'FETCH_ERROR', payload: err })
+			})
+		return () => controller.abort()
 	}, [url])
 
 	return state
