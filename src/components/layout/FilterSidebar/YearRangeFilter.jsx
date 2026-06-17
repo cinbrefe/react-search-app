@@ -16,14 +16,14 @@ export default function YearRangeFilter({ value, onChange }) {
 	}
 
 	return (
-		<div className="filter-group">
+		<div className='filter-group'>
 			<label>
 				From
-				<input type="number" placeholder="e.g. 2000" defaultValue={value.yearFrom} onChange={handleFromChange} />
+				<input type='number' placeholder='e.g. 2000' defaultValue={value.yearFrom} onChange={handleFromChange} />
 			</label>
 			<label>
 				To
-				<input type="number" placeholder="e.g. 2024" defaultValue={value.yearTo} onChange={handleToChange} />
+				<input type='number' placeholder='e.g. 2024' defaultValue={value.yearTo} onChange={handleToChange} />
 			</label>
 		</div>
 	)

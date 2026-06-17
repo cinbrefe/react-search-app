@@ -32,7 +32,7 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 		filters.yearTo !== INITIAL_FILTERS.yearTo
 
 	return (
-		<aside className="filter-sidebar">
+		<aside className='filter-sidebar'>
 			<h2>Filters</h2>
 			{disabled && (
 				<p>
@@ -42,15 +42,24 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 			)}
 
 			<fieldset disabled={disabled} style={{ border: 'none', padding: 0, margin: 0 }}>
-				{hasActiveFilters && <button type="button" onClick={handleResetFilters}>Reset Filters</button>}
-				<Accordion title="Genre">
-					<GenreFilter value={filters.genres} onChange={value => handleFilterChange('genres', value)} />	
+				{hasActiveFilters && <button type='button' onClick={handleResetFilters}>Reset Filters</button>}
+				<Accordion title='Genre'>
+					<GenreFilter
+						value={filters.genres}
+						onChange={value => handleFilterChange('genres', value)}
+					/>
 				</Accordion>
-				<Accordion title="Rating">
-					<RatingFilter value={filters.ratingFilter} onChange={value => handleFilterChange('ratingFilter', value)} />
+				<Accordion title='Rating'>
+					<RatingFilter
+						value={filters.ratingFilter}
+						onChange={value => handleFilterChange('ratingFilter', value)}
+					/>
 				</Accordion>
-				<Accordion title="Year Range">
-					<YearRangeFilter value={{ yearFrom: filters.yearFrom, yearTo: filters.yearTo }} onChange={handleYearRangeChange} />
+				<Accordion title='Year Range'>
+					<YearRangeFilter
+						value={{ yearFrom: filters.yearFrom, yearTo: filters.yearTo }}
+						onChange={handleYearRangeChange}
+					/>
 				</Accordion>
 			</fieldset>
 		</aside>

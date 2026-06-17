@@ -11,7 +11,7 @@ export default function CardDetails({ id }) {
 	const { poster_path, title, overview, release_date, genres, vote_average, runtime } = data
 
 	return (
-		<div className="artwork-details">
+		<div className='artwork-details'>
 			<img src={`${IMAGE_BASE_URL}${poster_path}`} alt={title} />
 			<h2>{title}</h2>
 			<p>
@@ -24,7 +24,8 @@ export default function CardDetails({ id }) {
 			</p>
 			<p>
 				<span style={{ fontWeight: 'bold' }}>Genre:</span>
-				{genres?.map(g => g.name).join(', ')}</p>
+				{genres?.map(g => g.name).join(', ')}
+			</p>
 			<p>
 				<span style={{ fontWeight: 'bold' }}>Rating:</span>
 				{vote_average ? `${vote_average.toFixed(1)} / 10` : ''}

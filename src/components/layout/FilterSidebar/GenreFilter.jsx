@@ -9,7 +9,7 @@ export default function GenreFilter({ value, onChange }) {
 	}
 
 	return (
-		<div className="filter-group">
+		<div className='filter-group'>
 			<form>
 				{GENRES.map(genre => (
 					<Checkbox

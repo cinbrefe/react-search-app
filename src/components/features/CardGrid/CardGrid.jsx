@@ -12,7 +12,7 @@ function buildDiscoverParams(filters, page, apiKey) {
 		page,
 	})
 	params.set('sort_by', filters?.sortBy || 'popularity.desc')
-	if (filters?.genres?.length > 0) params.set('with_genres', filters.genres.join(',')) 
+	if (filters?.genres?.length > 0) params.set('with_genres', filters.genres.join(','))
 	if (filters?.ratingFilter) {
 		params.set('vote_average.gte', filters.ratingFilter)
 		params.set('vote_count.gte', 100)
@@ -50,7 +50,7 @@ export default function CardGrid({ query, filters, onSelect }) {
 	const movies = data.results.filter(movie => movie.poster_path)
 
 	return (
-		<div className="card-grid">
+		<div className='card-grid'>
 			{movies.map(movie => (
 				<Card
 					key={movie.id}

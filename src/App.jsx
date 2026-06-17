@@ -13,7 +13,7 @@ function App() {
 
 	return (
 		<>
-			<Modal isOpen={selectedId !== null} onClose={() => setSelectedId(null)} buttonCaption="Close">
+			<Modal isOpen={selectedId !== null} onClose={() => setSelectedId(null)} buttonCaption='Close'>
 				<CardDetails id={selectedId} />
 			</Modal>
 			<Header />

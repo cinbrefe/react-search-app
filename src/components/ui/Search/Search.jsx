@@ -15,11 +15,11 @@ export default function Search({ onSearch }) {
 	return (
 		<form onSubmit={handleSubmit}>
 			<Input
-				type="text"
-				placeholder="Search for movies..."
+				type='text'
+				placeholder='Search for movies...'
 				ref={inputRef}
 			/>
-			<button type="submit">Search</button>
+			<button type='submit'>Search</button>
 		</form>
 	)
 }
