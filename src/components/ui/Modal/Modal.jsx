@@ -14,9 +14,9 @@ export default function Modal({ children, buttonCaption, isOpen, onClose }) {
 	}, [isOpen])
 
 	return createPortal(
-		<dialog ref={dialog} onCancel={onClose} className=''>
+		<dialog ref={dialog} onCancel={onClose}>
 			{children}
-			<form method='dialog' className=''>
+			<form method='dialog'>
 				<button onClick={onClose}>{buttonCaption}</button>
 			</form>
 		</dialog>,

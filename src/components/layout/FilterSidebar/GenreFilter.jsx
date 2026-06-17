@@ -10,17 +10,15 @@ export default function GenreFilter({ value, onChange }) {
 
 	return (
 		<div className='filter-group'>
-			<form>
-				{GENRES.map(genre => (
-					<Checkbox
-						key={genre.id}
-						label={genre.name}
-						value={genre.id}
-						checked={value.includes(genre.id)}
-						onChange={handleChange}
-					/>
-				))}
-			</form>
+			{GENRES.map(genre => (
+				<Checkbox
+					key={genre.id}
+					label={genre.name}
+					value={genre.id}
+					checked={value.includes(genre.id)}
+					onChange={handleChange}
+				/>
+			))}
 		</div>
 	)
 }

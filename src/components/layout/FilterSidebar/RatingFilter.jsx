@@ -9,17 +9,15 @@ export default function RatingFilter({ value, onChange }) {
 
 	return (
 		<div className='filter-group'>
-			<form>
-				{RATINGS.map(r => (
-					<Checkbox
-						key={r}
-						label={`${r}+`}
-						value={r}
-						checked={value === r}
-						onChange={handleChange}
-					/>
-				))}
-			</form>
+			{RATINGS.map(r => (
+				<Checkbox
+					key={r}
+					label={`${r}+`}
+					value={r}
+					checked={value === r}
+					onChange={handleChange}
+				/>
+			))}
 		</div>
 	)
 }

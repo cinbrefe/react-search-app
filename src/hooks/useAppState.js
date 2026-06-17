@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import { INITIAL_FILTERS } from '@/constants/filters'
 
 export function useAppState() {
 	const [query, setQuery] = useState('')
-	const [filters, setFilters] = useState({ sortBy: 'popularity.desc' })
+	const [filters, setFilters] = useState(INITIAL_FILTERS)
 	const [selectedId, setSelectedId] = useState(null)
 
 	function handleSortChange(value) {
