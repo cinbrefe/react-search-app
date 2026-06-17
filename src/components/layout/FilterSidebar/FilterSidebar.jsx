@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Accordion from '../../ui/Accordion/Accordion'
-import SortFilter from './SortFilter'
 import GenreFilter from './GenreFilter'
 import RatingFilter from './RatingFilter'
 import YearRangeFilter from './YearRangeFilter'
@@ -30,8 +29,7 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 		filters.genres.length > 0 ||
 		filters.ratingFilter !== INITIAL_FILTERS.ratingFilter ||
 		filters.yearFrom !== INITIAL_FILTERS.yearFrom ||
-		filters.yearTo !== INITIAL_FILTERS.yearTo ||
-		filters.sortBy !== INITIAL_FILTERS.sortBy
+		filters.yearTo !== INITIAL_FILTERS.yearTo
 
 	return (
 		<aside className="filter-sidebar">
@@ -45,7 +43,6 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 
 			<fieldset disabled={disabled} style={{ border: 'none', padding: 0, margin: 0 }}>
 				{hasActiveFilters && <button type="button" onClick={handleResetFilters}>Reset Filters</button>}
-				<SortFilter value={filters.sortBy} onChange={value => handleFilterChange('sortBy', value)} />
 				<Accordion title="Genre">
 					<GenreFilter value={filters.genres} onChange={value => handleFilterChange('genres', value)} />	
 				</Accordion>
