@@ -13,11 +13,12 @@ function App() {
 
 	return (
 		<ErrorBoundary>
-			<Modal isOpen={selectedId !== null} onClose={() => setSelectedId(null)} buttonCaption='Close'>
+			<Modal isOpen={selectedId !== null} onClose={() => setSelectedId(null)} buttonCaption='Close' label='Movie details'>
 				<CardDetails id={selectedId} />
 			</Modal>
+			<a href='#main-content' className='skip-link'>Skip to main content</a>
 			<Header onSearch={setQuery} />
-			<main>
+			<main id='main-content'>
 				<div style={{ display: 'flex' }}>
 					<FilterSidebar onFilter={setFilters} disabled={!!query} onClearSearch={handleClearSearch} />
 					<div>

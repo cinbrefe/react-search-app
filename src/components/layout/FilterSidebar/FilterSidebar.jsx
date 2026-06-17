@@ -42,6 +42,7 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 			)}
 
 			<fieldset disabled={disabled} style={{ border: 'none', padding: 0, margin: 0 }}>
+				<legend className='visually-hidden'>Filters</legend>
 				{hasActiveFilters && (
 					<button type='button' onClick={handleResetFilters}>
 						Reset Filters

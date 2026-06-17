@@ -33,8 +33,8 @@ export default function CardGrid({ query, filters, onSelect }) {
 	const { data, loading, error } = useFetch(url)
 
 	if (loading) return <Loading message={query ? `Searching for "${query}"...` : 'Loading movies...'} />
-	if (error) return <p>Error: {error.message}</p>
-	if (!data?.results?.length) return <p>{query ? `No results found for "${query}"` : 'No movies available.'}</p>
+	if (error) return <p role='status' aria-live='polite'>Error: {error.message}</p>
+	if (!data?.results?.length) return <p role='status' aria-live='polite'>{query ? `No results found for "${query}"` : 'No movies available.'}</p>
 
 	const movies = data.results.filter(movie => movie.poster_path)
 

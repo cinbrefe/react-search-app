@@ -1,9 +1,10 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useId } from 'react'
 import { createPortal } from 'react-dom'
 import './Modal.scss'
 
-export default function Modal({ children, buttonCaption, isOpen, onClose }) {
+export default function Modal({ children, buttonCaption, isOpen, onClose, label }) {
 	const dialog = useRef()
+	const descriptionId = useId()
 
 	useEffect(() => {
 		if (isOpen) {
@@ -14,10 +15,17 @@ export default function Modal({ children, buttonCaption, isOpen, onClose }) {
 	}, [isOpen])
 
 	return createPortal(
-		<dialog ref={dialog} onCancel={onClose}>
-			{children}
+		<dialog ref={dialog} onCancel={onClose} aria-modal='true' aria-label={label} aria-describedby={descriptionId}>
+			<div id={descriptionId}>
+				{children}
+			</div>
 			<form method='dialog'>
-				<button onClick={onClose}>{buttonCaption}</button>
+				<button
+					onClick={onClose}
+					type='button'
+				>
+					{buttonCaption}
+				</button>
 			</form>
 		</dialog>,
 		document.getElementById('modal')

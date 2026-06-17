@@ -9,7 +9,7 @@ export default function GenreFilter({ value, onChange }) {
 	}
 
 	return (
-		<div className='filter-group'>
+		<div className='filter-group' role='group' aria-label='Genre'>
 			{GENRES.map(genre => (
 				<Checkbox
 					key={genre.id}
