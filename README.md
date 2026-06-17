@@ -17,6 +17,15 @@ A movie search and discovery app where you can explore popular films, search by 
 - Sass
 - TMDB API
 
+## Path Aliases
+
+This project uses the `@` alias to reference the `src/` directory, avoiding brittle relative imports:
+
+```js
+import { useFetch } from '@/hooks/useFetch'
+import { TMDB_API_KEY } from '@/constants/api'
+```
+
 ## Getting Started
 
 1. Clone the repo

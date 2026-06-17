@@ -1,5 +1,5 @@
-import Dropdown from '../Form/Dropdown/Dropdown'
-import { SORT_OPTIONS } from '../../../constants/filters'
+import Dropdown from '@/components/ui/Form/Dropdown/Dropdown'
+import { SORT_OPTIONS } from '@/constants/filters'
 
 export default function SortBar({ value, onChange }) {
 	return (

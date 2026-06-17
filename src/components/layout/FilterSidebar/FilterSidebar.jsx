@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import Accordion from '../../ui/Accordion/Accordion'
+import Accordion from '@/components/ui/Accordion/Accordion'
 import GenreFilter from './GenreFilter'
 import RatingFilter from './RatingFilter'
 import YearRangeFilter from './YearRangeFilter'
-import { INITIAL_FILTERS } from '../../../constants/filters'
+import { INITIAL_FILTERS } from '@/constants/filters'
 
 export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 	const [filters, setFilters] = useState(INITIAL_FILTERS)

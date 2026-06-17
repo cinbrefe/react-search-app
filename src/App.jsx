@@ -1,25 +1,15 @@
-import { useState } from 'react'
+import { useAppState } from '@/hooks/useAppState'
 
-import Header from './components/layout/Header/Header'
-import Search from './components/ui/Search/Search'
-import SortBar from './components/ui/SortBar/SortBar'
-import FilterSidebar from './components/layout/FilterSidebar/FilterSidebar'
-import CardGrid from './components/features/CardGrid/CardGrid'
-import Modal from './components/ui/Modal/Modal'
-import CardDetails from './components/features/CardDetails/CardDetails'
+import Header from '@/components/layout/Header/Header'
+import Search from '@/components/ui/Search/Search'
+import SortBar from '@/components/ui/SortBar/SortBar'
+import FilterSidebar from '@/components/layout/FilterSidebar/FilterSidebar'
+import CardGrid from '@/components/features/CardGrid/CardGrid'
+import Modal from '@/components/ui/Modal/Modal'
+import CardDetails from '@/components/features/CardDetails/CardDetails'
 
 function App() {
-	const [query, setQuery] = useState('')
-	const [filters, setFilters] = useState({ sortBy: 'popularity.desc' })
-	const [selectedId, setSelectedId] = useState(null)
-
-	function handleSortChange(value) {
-		setFilters(prev => ({ ...prev, sortBy: value }))
-	}
-
-	function handleClearSearch() {
-		setQuery('')
-	}
+	const { query, setQuery, filters, setFilters, selectedId, setSelectedId, handleSortChange, handleClearSearch } = useAppState()
 
 	return (
 		<>

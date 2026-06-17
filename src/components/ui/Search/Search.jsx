@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 
-import Input from '../Form/Input/Input'
+import Input from '@/components/ui/Form/Input/Input'
 
 export default function Search({ onSearch }) {
 	const inputRef = useRef()

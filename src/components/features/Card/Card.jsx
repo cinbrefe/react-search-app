@@ -1,5 +1,5 @@
 import './Card.scss'
-import { IMAGE_BASE_URL } from '../../../constants/api'
+import { IMAGE_BASE_URL } from '@/constants/api'
 
 export default function Card({ title, release_date, poster_path, onSelect }) {
 	return (

@@ -1,5 +1,5 @@
-import Checkbox from '../../ui/Form/Checkbox/Checkbox'
-import { RATINGS } from '../../../constants/filters'
+import Checkbox from '@/components/ui/Form/Checkbox/Checkbox'
+import { RATINGS } from '@/constants/filters'
 
 export default function RatingFilter({ value, onChange }) {
 	function handleChange(event) {

@@ -1,5 +1,5 @@
-import Checkbox from '../../ui/Form/Checkbox/Checkbox'
-import { GENRES } from '../../../constants/filters'
+import Checkbox from '@/components/ui/Form/Checkbox/Checkbox'
+import { GENRES } from '@/constants/filters'
 
 export default function GenreFilter({ value, onChange }) {
 	function handleChange(event) {
