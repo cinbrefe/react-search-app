@@ -26,7 +26,7 @@ const useFetch = (url) => {
 			.then(data => dispatch({ type: 'FETCH_SUCCESS', payload: data }))
 			.catch(err => {
 				if (err.name === 'AbortError') return
-				dispatch({ type: 'FETCH_ERROR', payload: err })
+				dispatch({ type: 'FETCH_ERROR', payload: err instanceof Error ? err : new Error(String(err)) })
 			})
 		return () => controller.abort()
 	}, [url])

@@ -37,12 +37,16 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 			{disabled && (
 				<p>
 					Filters are not available while searching.{' '}
-					<button onClick={onClearSearch}>Clear search</button>
+					<button onClick={onClearSearch} type='button'>Clear search</button>
 				</p>
 			)}
 
 			<fieldset disabled={disabled} style={{ border: 'none', padding: 0, margin: 0 }}>
-				{hasActiveFilters && <button type='button' onClick={handleResetFilters}>Reset Filters</button>}
+				{hasActiveFilters && (
+					<button type='button' onClick={handleResetFilters}>
+						Reset Filters
+					</button>
+				)}
 				<Accordion title='Genre'>
 					<GenreFilter
 						value={filters.genres}

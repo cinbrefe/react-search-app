@@ -9,7 +9,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 	// Navigation flags to control button disabled states
 	const canGoPrev = currentPage > 1
 	const canGoNext = currentPage < totalPages
-	const canJumpForward = currentPage + 10 <= totalPages
+	const canJumpForward = currentPage + 5 <= totalPages
 
 	// Builds a list of up to 5 page numbers centered around the current page
 	function buildPageList() {
@@ -24,7 +24,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 
 	function handlePrev() { onPageChange(currentPage - 1) }
 	function handleNext() { onPageChange(currentPage + 1) }
-	// Jumps forward 10 pages at a time
+	// Jumps forward 5 pages at a time
 	function handleJumpForward() { onPageChange(currentPage + 5) }
 
 	return (
@@ -51,7 +51,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 				</button>
 			))}
 
-			{/* Jump forward 10 pages, hidden when near the end */}
+			{/* Jump forward 5 pages, hidden when near the end */}
 			<button
 				type='button'
 				aria-label='Jump forward 5 pages'
