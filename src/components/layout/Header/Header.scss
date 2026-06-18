@@ -1,0 +1,21 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.site-header {
+	padding: $spacing-lg 0;
+	border-bottom: 1px solid $color-border;
+
+	&__container {
+		@include flex(column);
+		gap: $spacing-sm;
+	}
+
+	&__logo {
+		align-self: flex-start;
+		max-height: 10px;
+	}
+
+	&__content {
+		@include flex(row, space-between, center);
+	}
+}

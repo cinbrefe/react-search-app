@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import './CardGrid.scss'
+import '@/components/features/CardGrid/CardGrid.scss'
 import Card from '@/components/features/Card/Card'
 import Pagination from '@/components/ui/Pagination/Pagination'
 import useFetch from '@/hooks/useFetch'
@@ -40,14 +40,17 @@ export default function CardGrid({ query, filters, onSelect }) {
 
 	return (
 		<div className='card-grid'>
-			{movies.map(movie => (
-				<Card
-					key={movie.id}
-					title={movie.title}
-					poster_path={movie.poster_path}
-					onSelect={() => onSelect(movie.id)}
-				/>
-			))}
+			<ul className='card-grid__list' role='list' aria-label={query ? `Search results for "${query}"` : 'Popular movies'}>
+				{movies.map(movie => (
+					<li key={movie.id}>
+						<Card
+							title={movie.title}
+							poster_path={movie.poster_path}
+							onSelect={() => onSelect(movie.id)}
+						/>
+					</li>
+				))}
+			</ul>
 			<Pagination
 				currentPage={currentPage}
 				totalPages={Math.min(data.total_pages || 1, 500)}

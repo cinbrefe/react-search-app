@@ -1,9 +1,12 @@
 import { useState } from 'react'
+import { RotateCcw } from 'lucide-react'
+
+import { INITIAL_FILTERS } from '@/constants/filters'
 import Accordion from '@/components/ui/Accordion/Accordion'
 import GenreFilter from './GenreFilter'
 import RatingFilter from './RatingFilter'
 import YearRangeFilter from './YearRangeFilter'
-import { INITIAL_FILTERS } from '@/constants/filters'
+import '@/components/layout/FilterSidebar/FilterSidebar.scss'
 
 export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 	const [filters, setFilters] = useState(INITIAL_FILTERS)
@@ -33,7 +36,19 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 
 	return (
 		<aside className='filter-sidebar'>
-			<h2>Filters</h2>
+			<div className='filter-sidebar__header'>
+				<h2>Filters</h2>
+				{hasActiveFilters && (
+					<button className='filter-sidebar__reset' onClick={handleResetFilters} type='button'>
+						<span className='filter-sidebar__icon' aria-hidden='true'>
+							<RotateCcw size={15} />
+						</span>
+						Reset Filters
+						
+					</button>
+				)}
+			</div>
+
 			{disabled && (
 				<p>
 					Filters are not available while searching.{' '}
@@ -43,11 +58,6 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 
 			<fieldset disabled={disabled} style={{ border: 'none', padding: 0, margin: 0 }}>
 				<legend className='visually-hidden'>Filters</legend>
-				{hasActiveFilters && (
-					<button type='button' onClick={handleResetFilters}>
-						Reset Filters
-					</button>
-				)}
 				<Accordion title='Genre'>
 					<GenreFilter
 						value={filters.genres}

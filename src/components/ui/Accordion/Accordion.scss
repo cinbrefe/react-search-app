@@ -1,0 +1,32 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.accordion {
+	&__button {
+		@include flex(row, space-between, center);
+		border-bottom: 1px solid $color-border;
+		cursor: pointer;
+		font-size: $font-size-sm;
+		padding: $spacing-md 0;
+		text-transform: uppercase;
+		width: 100%;
+
+		&:hover {
+			color: $color-accent;
+		}
+	}
+
+	&__content {
+		padding: $spacing-md;
+
+	}
+
+	&__icon {
+		margin-left: $spacing-sm;
+		transition: transform 0.3s ease;
+
+		&--open {
+			transform: rotate(180deg);
+		}
+	}
+}

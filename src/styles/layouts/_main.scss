@@ -1,13 +1,33 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+.app {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
 .container {
-	width: 100%;
-	max-width: $breakpoint-xl;
 	margin: 0 auto;
+	max-width: $breakpoint-xl;
 	padding: 0 $spacing-md;
+	width: 100%;
 
 	@include respond-to(md) {
 		padding: 0 $spacing-xl;
+	}
+}
+
+.site-main {
+	padding: $spacing-xl 0;
+
+	&__container {
+		@include flex(row);
+		gap: $spacing-xl;
+	}
+
+	&__content {
+		flex: 1;
+		padding: $spacing-md 0;
 	}
 }

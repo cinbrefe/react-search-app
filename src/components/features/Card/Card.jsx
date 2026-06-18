@@ -1,4 +1,4 @@
-import './Card.scss'
+import '@/components/features/Card/Card.scss'
 import { IMAGE_BASE_URL } from '@/constants/api'
 
 export default function Card({ title, poster_path, onSelect }) {
@@ -9,7 +9,7 @@ export default function Card({ title, poster_path, onSelect }) {
 			onClick={onSelect}
 			type='button'
 		>
-			<img src={`${IMAGE_BASE_URL}${poster_path}`} alt='' aria-hidden='true' />
+			<img className='card__image' src={`${IMAGE_BASE_URL}${poster_path}`} alt='' aria-hidden='true' />
 		</button>
 	)
 }

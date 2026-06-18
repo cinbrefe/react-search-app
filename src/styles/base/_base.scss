@@ -1,0 +1,21 @@
+@use '../abstracts/variables' as *;
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: $font-family-base;
+	font-size: $font-size-base;
+	line-height: 1.625;
+	color: $color-text;
+	background-color: $color-background;
+	min-height: 100vh;
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+}
+
+::placeholder {
+	font-family: $font-family-base;
+	color: $color-text-muted;
+}

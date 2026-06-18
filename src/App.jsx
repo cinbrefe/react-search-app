@@ -12,22 +12,24 @@ function App() {
 	const { query, setQuery, filters, setFilters, selectedId, setSelectedId, handleSortChange, handleClearSearch } = useAppState()
 
 	return (
-		<ErrorBoundary>
-			<Modal isOpen={selectedId !== null} onClose={() => setSelectedId(null)} buttonCaption='Close' label='Movie details'>
-				<CardDetails id={selectedId} />
-			</Modal>
-			<a href='#main-content' className='skip-link'>Skip to main content</a>
-			<Header onSearch={setQuery} />
-			<main id='main-content'>
-				<div style={{ display: 'flex' }}>
-					<FilterSidebar onFilter={setFilters} disabled={!!query} onClearSearch={handleClearSearch} />
-					<div>
-						<SortBar value={filters.sortBy} onChange={handleSortChange} />
-						<CardGrid key={`${query}-${JSON.stringify(filters)}`} query={query} filters={filters} onSelect={setSelectedId} />
+		<div className='app'>
+			<ErrorBoundary>
+				<Modal isOpen={selectedId !== null} onClose={() => setSelectedId(null)} buttonCaption='Close' label='Movie details'>
+					<CardDetails id={selectedId} />
+				</Modal>
+				<a href='#site-main' className='skip-link'>Skip to main content</a>
+				<Header onSearch={setQuery} />
+				<main id='site-main' className='site-main'>
+					<div className='container site-main__container'>
+						<FilterSidebar onFilter={setFilters} disabled={!!query} onClearSearch={handleClearSearch} />
+						<div className='site-main__content'>
+							<SortBar value={filters.sortBy} onChange={handleSortChange} />
+							<CardGrid key={`${query}-${JSON.stringify(filters)}`} query={query} filters={filters} onSelect={setSelectedId} />
+						</div>
 					</div>
-				</div>
-			</main>
-		</ErrorBoundary>
+				</main>
+			</ErrorBoundary>
+		</div>
 	)
 }
 
