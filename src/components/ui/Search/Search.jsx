@@ -1,6 +1,8 @@
 import { useRef } from 'react'
+import { Search as SearchIcon } from 'lucide-react'
 
 import Input from '@/components/ui/Form/Input/Input'
+import '@/components/ui/Search/Search.scss'
 
 export default function Search({ onSearch }) {
 	const inputRef = useRef()
@@ -13,15 +15,17 @@ export default function Search({ onSearch }) {
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
-		 	<label htmlFor='search-input' className='visually-hidden'>Search movies</label>  
-			<Input
-				id='search-input'
-				placeholder='Search for movies...'
-				ref={inputRef}
-				type='text'
-			/>
-			<button type='submit'>Search</button>
+		<form className='search-form' onSubmit={handleSubmit} role="search">
+			<div className='search-form__group'>
+				<label htmlFor='search-input' className='visually-hidden'>Search movies</label>  
+				<Input
+					id='search-input'
+					placeholder='Search for movies...'
+					ref={inputRef}
+					type='text'
+				/>
+				<button className='search-form__button' type='submit'><SearchIcon size={20} /></button>
+			</div>
 		</form>
 	)
 }

@@ -4,6 +4,9 @@
 //	totalPages  - total number of pages available (number)
 //	onPageChange - callback fired with the new page number when user navigates
 
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import '@/components/ui/Pagination/Pagination.scss'
+
 export default function Pagination({ currentPage, totalPages, onPageChange }) {
 
 	// Navigation flags to control button disabled states
@@ -31,16 +34,18 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 		<nav aria-label='Pagination' className='pagination'>
 			<button
 				aria-label='Go to previous page'
+				className='pagination__btn pagination__btn--prev'
 				disabled={!canGoPrev}
 				onClick={handlePrev}
 				type='button'
 			>
-				Previous
+				<ChevronLeft size={20} />
 			</button>
 
 			{buildPageList().map(page => (
 				<button
 					key={page}
+					className={`pagination__btn pagination__btn--page ${page === currentPage ? 'pagination__btn--active' : ''}`}
 					type='button'
 					disabled={page === currentPage}
 					aria-label={page === currentPage ? `Page ${page}, current page` : `Go to page ${page}`}
@@ -53,6 +58,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 
 			{/* Jump forward 5 pages, hidden when near the end */}
 			<button
+				className='pagination__btn pagination__btn--jump'
 				type='button'
 				aria-label='Jump forward 5 pages'
 				onClick={handleJumpForward}
@@ -62,12 +68,13 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 			</button>
 
 			<button
+				className='pagination__btn pagination__btn--next'
 				aria-label='Go to next page'
 				disabled={!canGoNext}
 				onClick={handleNext}
 				type='button'
 			>
-				Next
+				<ChevronRight size={20} />
 			</button>
 		</nav>
 	)

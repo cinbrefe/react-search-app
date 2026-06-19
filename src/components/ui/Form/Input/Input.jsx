@@ -1,3 +1,5 @@
+import '@/components/ui/Form/Input/Input.scss'
+
 export default function Input({ id, type = 'text', value, onChange, placeholder, ref }) {
 	return (
 		<input

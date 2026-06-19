@@ -1,15 +1,23 @@
 import { useState, useId } from 'react'
-import '@/components/ui/Accordion/Accordion.scss'
-import { ChevronDown } from 'lucide-react'  
+import { ChevronDown } from 'lucide-react'
 
-export default function Accordion({ children, title }) {
-	const [isOpen, setIsOpen] = useState(false)
+import '@/components/ui/Accordion/Accordion.scss'
+
+export default function Accordion({ children, title, isOpen: controlledIsOpen, onToggle }) {
+	const [internalIsOpen, setInternalIsOpen] = useState(false)
 	const uniqueId = useId()
 	const headerId = `accordion-header-${uniqueId}`
 	const panelId = `accordion-panel-${uniqueId}`
 
+	const isControlled = controlledIsOpen !== undefined
+	const isOpen = isControlled ? controlledIsOpen : internalIsOpen
+
 	function toggleAccordion() {
-		setIsOpen(prev => !prev)
+		if (isControlled) {
+			onToggle()
+		} else {
+			setInternalIsOpen(prev => !prev)
+		}
 	}
 
 	return (
@@ -25,7 +33,7 @@ export default function Accordion({ children, title }) {
 				>
 					{title}
 					<span className={`accordion__icon ${isOpen ? 'accordion__icon--open' : ''}`} aria-hidden='true'>
-						 <ChevronDown size={20} />
+						<ChevronDown size={20} />
 					</span>
 				</button>
 			</h3>

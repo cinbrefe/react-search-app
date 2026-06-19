@@ -8,6 +8,7 @@
 		display: grid;
 		gap: $spacing-md;
 		grid-template-columns: repeat(2, 1fr);
+		margin-bottom: $spacing-md;
 
 		@include respond-to(md) {
 			grid-template-columns: repeat(3, 1fr);

@@ -1,5 +1,6 @@
-import Checkbox from '@/components/ui/Form/Checkbox/Checkbox'
 import { GENRES } from '@/constants/filters'
+
+import Checkbox from '@/components/ui/Form/Checkbox/Checkbox'
 
 export default function GenreFilter({ value, onChange }) {
 	function handleChange(event) {
@@ -9,7 +10,7 @@ export default function GenreFilter({ value, onChange }) {
 	}
 
 	return (
-		<div className='filter-group' role='group' aria-label='Genre'>
+		<div className='filter-sidebar__group' role='group' aria-label='Genre'>
 			{GENRES.map(genre => (
 				<Checkbox
 					key={genre.id}

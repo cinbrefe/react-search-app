@@ -1,11 +1,13 @@
 import { useState } from 'react'
 
-import '@/components/features/CardGrid/CardGrid.scss'
-import Card from '@/components/features/Card/Card'
-import Pagination from '@/components/ui/Pagination/Pagination'
-import useFetch from '@/hooks/useFetch'
 import { API_BASE_URL, TMDB_API_KEY } from '@/constants/api'
+import useFetch from '@/hooks/useFetch'
+
+import Card from '@/components/features/Card/Card'
 import Loading from '@/components/ui/Loading/Loading'
+import Pagination from '@/components/ui/Pagination/Pagination'
+
+import '@/components/features/CardGrid/CardGrid.scss'
 
 function buildDiscoverParams(filters, page, apiKey) {
 	const params = new URLSearchParams({

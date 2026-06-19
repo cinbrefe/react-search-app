@@ -1,5 +1,6 @@
 import { useRef, useEffect, useId } from 'react'
 import { createPortal } from 'react-dom'
+
 import './Modal.scss'
 
 export default function Modal({ children, buttonCaption, isOpen, onClose, label }) {

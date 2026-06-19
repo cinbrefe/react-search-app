@@ -1,0 +1,9 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.sort-bar {
+	&__label {
+		@include flex(row, flex-start, center);
+		gap: $spacing-md;
+	}
+}

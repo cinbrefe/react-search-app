@@ -16,6 +16,11 @@
 	}
 
 	&__content {
-		@include flex(row, space-between, center);
+		@include flex(column);
+		gap: $spacing-md;
+
+		@include respond-to(md) {
+			@include flex(row, space-between, center)
+		}
 	}
 }

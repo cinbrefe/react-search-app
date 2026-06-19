@@ -1,5 +1,6 @@
-import Checkbox from '@/components/ui/Form/Checkbox/Checkbox'
 import { RATINGS } from '@/constants/filters'
+
+import Checkbox from '@/components/ui/Form/Checkbox/Checkbox'
 
 export default function RatingFilter({ value, onChange }) {
 	function handleChange(event) {
@@ -8,7 +9,7 @@ export default function RatingFilter({ value, onChange }) {
 	}
 
 	return (
-		<div className='filter-group' role='group' aria-label='Rating'>
+		<div className='filter-sidebar__group' role='group' aria-label='Rating'>
 			{RATINGS.map(r => (
 				<Checkbox
 					key={r}

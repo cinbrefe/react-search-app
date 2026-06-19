@@ -3,19 +3,60 @@
 
 .filter-sidebar {
 	align-self: flex-start;
+	background-color: $color-background;
 	flex-shrink: 0;
-	max-height: 100vh;
-	overflow-y: auto;
 	padding: $spacing-md 0;
-	position: sticky;
-	top: 0;
-	width: 280px;
+	width: 100%;
+
+	@include respond-to(md) {
+		max-height: 100vh;
+		max-width: 200px;
+		overflow-y: auto;
+		position: sticky;
+		top: 0;
+		width: 100%;
+	}
+
+	@include respond-to(lg) {
+		max-width: 280px;
+	}
 
 	&__header {
 		@include flex(row, space-between, center);
 		border-bottom: 1px solid $color-border;
 		padding-bottom: $spacing-md;
 		margin-bottom: $spacing-md;
+	}
+
+	&__fieldset {
+		@include flex(row, align-start, center);
+		border: none;
+		flex-wrap: wrap;
+		gap: $spacing-sm;
+		margin: 0;
+		padding: 0;
+		position: relative;
+
+		@include respond-to(md) {
+			display: block;
+			position: static;
+		}
+	}
+
+	&__group {
+		&--year {
+			@include flex(column);
+			gap: $spacing-sm;
+		}
+	}
+
+	&__label {
+		@include flex(column);
+		gap: $spacing-xs;
+
+		&__input {
+			width: 100%;
+		}
 	}
 
 	&__reset {

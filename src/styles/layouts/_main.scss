@@ -19,11 +19,19 @@
 }
 
 .site-main {
-	padding: $spacing-xl 0;
+	padding: $spacing-md 0;
+
+	@include respond-to(md) {
+		padding: $spacing-xl 0;
+	}
 
 	&__container {
-		@include flex(row);
-		gap: $spacing-xl;
+		@include flex(column);
+
+		@include respond-to(md) {
+			@include flex(row);
+			gap: $spacing-xl;
+		}
 	}
 
 	&__content {

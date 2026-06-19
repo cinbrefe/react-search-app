@@ -1,12 +1,12 @@
 import { useAppState } from '@/hooks/useAppState'
 
-import ErrorBoundary from '@/components/ui/ErrorBoundary/ErrorBoundary'
-import Header from '@/components/layout/Header/Header'
-import SortBar from '@/components/ui/SortBar/SortBar'
-import FilterSidebar from '@/components/layout/FilterSidebar/FilterSidebar'
-import CardGrid from '@/components/features/CardGrid/CardGrid'
-import Modal from '@/components/ui/Modal/Modal'
 import CardDetails from '@/components/features/CardDetails/CardDetails'
+import CardGrid from '@/components/features/CardGrid/CardGrid'
+import FilterSidebar from '@/components/layout/FilterSidebar/FilterSidebar'
+import Header from '@/components/layout/Header/Header'
+import ErrorBoundary from '@/components/ui/ErrorBoundary/ErrorBoundary'
+import Modal from '@/components/ui/Modal/Modal'
+import SortBar from '@/components/ui/SortBar/SortBar'
 
 function App() {
 	const { query, setQuery, filters, setFilters, selectedId, setSelectedId, handleSortChange, handleClearSearch } = useAppState()

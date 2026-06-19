@@ -10,6 +10,14 @@ import '@/components/layout/FilterSidebar/FilterSidebar.scss'
 
 export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 	const [filters, setFilters] = useState(INITIAL_FILTERS)
+	const [activeAccordion, setActiveAccordion] = useState(null)
+	const isMobile = window.innerWidth < 768
+
+	function handleAccordionToggle(id) {
+		if (isMobile) {
+			setActiveAccordion(prev => prev === id ? null : id)
+		}
+	}
 
 	function handleFilterChange(key, value) {
 		const updated = { ...filters, [key]: value }
@@ -44,7 +52,6 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 							<RotateCcw size={15} />
 						</span>
 						Reset Filters
-						
 					</button>
 				)}
 			</div>
@@ -56,21 +63,33 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 				</p>
 			)}
 
-			<fieldset disabled={disabled} style={{ border: 'none', padding: 0, margin: 0 }}>
+			<fieldset className='filter-sidebar__fieldset' disabled={disabled}>
 				<legend className='visually-hidden'>Filters</legend>
-				<Accordion title='Genre'>
+				<Accordion
+					title='Genre'
+					isOpen={isMobile ? activeAccordion === 'genre' : undefined}
+					onToggle={() => handleAccordionToggle('genre')}
+				>
 					<GenreFilter
 						value={filters.genres}
 						onChange={value => handleFilterChange('genres', value)}
 					/>
 				</Accordion>
-				<Accordion title='Rating'>
+				<Accordion
+					title='Rating'
+					isOpen={isMobile ? activeAccordion === 'rating' : undefined}
+					onToggle={() => handleAccordionToggle('rating')}
+				>
 					<RatingFilter
 						value={filters.ratingFilter}
 						onChange={value => handleFilterChange('ratingFilter', value)}
 					/>
 				</Accordion>
-				<Accordion title='Year Range'>
+				<Accordion
+					title='Year Range'
+					isOpen={isMobile ? activeAccordion === 'year' : undefined}
+					onToggle={() => handleAccordionToggle('year')}
+				>
 					<YearRangeFilter
 						value={{ yearFrom: filters.yearFrom, yearTo: filters.yearTo }}
 						onChange={handleYearRangeChange}

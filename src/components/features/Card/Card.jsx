@@ -1,5 +1,6 @@
-import '@/components/features/Card/Card.scss'
 import { IMAGE_BASE_URL } from '@/constants/api'
+
+import '@/components/features/Card/Card.scss'
 
 export default function Card({ title, poster_path, onSelect }) {
 	return (

@@ -1,0 +1,14 @@
+@use '@/styles/abstracts/variables' as *;
+
+.search-form {
+	&__group {
+		position: relative;
+	}
+	&__button {
+		color: $color-text-muted;
+		position: absolute;
+		right: $spacing-md;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}

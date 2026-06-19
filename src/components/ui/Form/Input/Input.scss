@@ -1,0 +1,16 @@
+@use '@/styles/abstracts/variables' as *;
+
+input[type='text'],
+input[type='number'] {
+	background-color: $color-background;
+	border: 1px solid $color-border;
+	border-radius: $border-radius-md;
+	color: $color-text;
+	padding: $spacing-sm $spacing-md;
+	width: 100%;
+
+	&:focus {
+		border-color: $color-white;
+		outline: none;
+	}
+}

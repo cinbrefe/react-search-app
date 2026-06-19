@@ -1,4 +1,5 @@
 import Search from '@/components/ui/Search/Search'
+
 import logo from '@/assets/tmdb-logo.svg'
 import '@/components/layout/Header/Header.scss'
 

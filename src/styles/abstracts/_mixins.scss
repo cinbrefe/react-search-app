@@ -1,6 +1,6 @@
 @use 'variables' as *;
 
-// Responsive breakpoints
+// Responsive breakpoints (min-width, mobile-first)
 @mixin respond-to($breakpoint) {
 	@if $breakpoint == sm {
 		@media (min-width: $breakpoint-sm) { @content; }
@@ -11,6 +11,11 @@
 	} @else if $breakpoint == xl {
 		@media (min-width: $breakpoint-xl) { @content; }
 	}
+}
+
+// Mobile only (max-width)
+@mixin mobile-only {
+	@media (max-width: #{$breakpoint-md - 1px}) { @content; }
 }
 
 // Flexbox
