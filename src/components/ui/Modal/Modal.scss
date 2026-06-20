@@ -1,12 +1,36 @@
 @use '../../../styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
 
-dialog {
-	min-width: 320px;
-	min-height: 400px;
-	border: none;
-	border-radius: $border-radius-md;
-	padding: $spacing-xl;
-	box-shadow: $shadow-lg;
+.modal {
+	background-color: $color-surface;
+	border: 1px solid $color-border;
+	color: $color-text;
+	margin: auto;
+	max-height: 100dvh;
+	overflow-y: auto;
+	position: relative;
+	width: 100%;
+
+	@include respond-to(md) {
+		max-height: none;
+		max-width: 900px;
+	}
+
+	&__close {
+		color: $color-text-muted;
+		cursor: pointer;
+		position: absolute;
+		right: $spacing-md;
+		top: $spacing-md;
+
+		&-icon {
+			@include icon(20px);
+		}
+
+		&:hover {
+			color: $color-text;
+		}
+	}
 
 	&::backdrop {
 		background: rgba(0, 0, 0, 0.8);

@@ -5,6 +5,10 @@
 	@include flex(row, center);
 	gap: $spacing-sm;
 
+	&__icon {
+		@include icon(24px);
+	}
+
 	&__btn {
 		background-color: $color-background;
 		border: 1px solid $color-border;

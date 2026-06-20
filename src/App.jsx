@@ -14,7 +14,7 @@ function App() {
 	return (
 		<div className='app'>
 			<ErrorBoundary>
-				<Modal isOpen={selectedId !== null} onClose={() => setSelectedId(null)} buttonCaption='Close' label='Movie details'>
+				<Modal isOpen={selectedId !== null} onClose={() => setSelectedId(null)} label='Movie details'>
 					<CardDetails id={selectedId} />
 				</Modal>
 				<a href='#site-main' className='skip-link'>Skip to main content</a>

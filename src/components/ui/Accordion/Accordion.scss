@@ -33,14 +33,13 @@
 		right: 0;
 		top: 100%;
 		width: 100%;
-		z-index: 10;
+		z-index: 1;
 
 		@include respond-to(md) {
 			background-color: transparent;
-			padding: 0;
+			padding: $spacing-md 0;
 			position: static;
 			width: auto;
-			z-index: auto;
 		}
 	}
 
@@ -50,6 +49,10 @@
 
 		&--open {
 			transform: rotate(180deg);
+		}
+
+		&-svg {
+			@include icon(20px);
 		}
 	}
 }

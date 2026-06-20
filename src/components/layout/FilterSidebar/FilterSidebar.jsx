@@ -49,7 +49,7 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 				{hasActiveFilters && (
 					<button className='filter-sidebar__reset' onClick={handleResetFilters} type='button'>
 						<span className='filter-sidebar__icon' aria-hidden='true'>
-							<RotateCcw size={15} />
+							<RotateCcw className='filter-sidebar__reset-icon' />
 						</span>
 						Reset Filters
 					</button>
@@ -57,9 +57,9 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 			</div>
 
 			{disabled && (
-				<p>
+				<p className='filter-sidebar__disabled-message'>
 					Filters are not available while searching.{' '}
-					<button onClick={onClearSearch} type='button'>Clear search</button>
+					<button className='filter-sidebar__clear-search' onClick={onClearSearch} type='button'>Clear search</button>
 				</p>
 			)}
 

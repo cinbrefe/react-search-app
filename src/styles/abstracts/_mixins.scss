@@ -27,6 +27,12 @@
 	justify-content: $justify;
 }
 
+// Icon size
+@mixin icon($size: 20px) {
+	max-width: $size;
+	width: 100%;
+}
+
 // Truncate text
 @mixin truncate {
 	overflow: hidden;

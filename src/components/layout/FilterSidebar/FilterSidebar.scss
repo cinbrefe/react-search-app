@@ -28,6 +28,24 @@
 		margin-bottom: $spacing-md;
 	}
 
+	&__disabled-message {
+		font-size: $font-size-sm;
+		margin-bottom: $spacing-md;
+	}
+
+	&__clear-search {
+		@include flex(row, center, center);
+		font-size: $font-size-sm;
+		gap: $spacing-xs;
+		padding: 0;
+		text-decoration: underline;
+
+		&:focus,
+		&:hover {
+			color: $color-accent;
+		}
+	}
+
 	&__fieldset {
 		@include flex(row, align-start, center);
 		border: none;
@@ -65,6 +83,10 @@
 		gap: $spacing-xs;
 		padding: 0;
 		text-transform: uppercase;
+
+		&-icon {
+			@include icon(15px);
+		}
 
 		&:focus,
 		&:hover {

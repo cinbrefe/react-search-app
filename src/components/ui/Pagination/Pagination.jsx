@@ -39,7 +39,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 				onClick={handlePrev}
 				type='button'
 			>
-				<ChevronLeft size={20} />
+				<ChevronLeft className='pagination__icon' />
 			</button>
 
 			{buildPageList().map(page => (
@@ -74,7 +74,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 				onClick={handleNext}
 				type='button'
 			>
-				<ChevronRight size={20} />
+				<ChevronRight className='pagination__icon' />
 			</button>
 		</nav>
 	)

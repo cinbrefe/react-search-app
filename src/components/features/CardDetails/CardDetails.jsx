@@ -1,6 +1,7 @@
 import useFetch from '@/hooks/useFetch'
 import { API_BASE_URL, IMAGE_BASE_URL, TMDB_API_KEY } from '@/constants/api'
 import Loading from '@/components/ui/Loading/Loading'
+import '@/components/features/CardDetails/CardDetails.scss'
 
 export default function CardDetails({ id }) {
 	const { data, loading, error } = useFetch(id ? `${API_BASE_URL}/movie/${id}?api_key=${TMDB_API_KEY}` : null)
@@ -13,26 +14,34 @@ export default function CardDetails({ id }) {
 
 	return (
 		<div className='card-details'>
-			<img src={`${IMAGE_BASE_URL}${poster_path}`} alt={title} />
-			<h2>{title}</h2>
-			<p>
-				<span style={{ fontWeight: 'bold' }}>Release date: </span>
-				{release_date?.slice(0, 4)}
-			</p>
-			<p>
-				<span style={{ fontWeight: 'bold' }}>Runtime: </span>
-				{runtime} min
-			</p>
-			<p>
-				<span style={{ fontWeight: 'bold' }}>Genre: </span>
-				{genres?.map(g => g.name).join(', ')}
-			</p>
-			<p>
-				<span style={{ fontWeight: 'bold' }}>Rating: </span>
-				{vote_average ? `${vote_average.toFixed(1)} / 10` : ''}
-			</p>
-			<p style={{ fontWeight: 'bold' }}>Overview: </p>
-			<p>{overview}</p>
+			<img
+				className='card-details__poster'
+				src={`${IMAGE_BASE_URL}${poster_path}`}
+				alt={title}
+			/>
+			<div className='card-details__content'>
+				<h2 className='card-details__title h1'>{title}</h2>
+				<dl className='card-details__meta'>
+					<div className='card-details__meta-item'>
+						<dt className='card-details__meta-label'>Release date:</dt>
+						<dd className='card-details__meta-value'>{release_date?.slice(0, 4)}</dd>
+					</div>
+					<div className='card-details__meta-item'>
+						<dt className='card-details__meta-label'>Runtime:</dt>
+						<dd className='card-details__meta-value'>{runtime} min</dd>
+					</div>
+					<div className='card-details__meta-item'>
+						<dt className='card-details__meta-label'>Rating:</dt>
+						<dd className='card-details__meta-value'>{vote_average ? `${vote_average.toFixed(1)} / 10` : ''}</dd>
+					</div>
+					<div className='card-details__meta-item'>
+						<dt className='card-details__meta-label'>Genre:</dt>
+						<dd className='card-details__meta-value'>{genres?.map(g => g.name).join(', ')}</dd>
+					</div>
+				</dl>
+				<p className='card-details__overview-label'>Overview</p>
+				<p className='card-details__overview'>{overview}</p>
+			</div>
 		</div>
 	)
 }

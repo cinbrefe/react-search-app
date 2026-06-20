@@ -1,0 +1,91 @@
+@use '../../../styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.card-details {
+	@include flex(column);
+	gap: $spacing-xl;
+	padding: $spacing-md;
+
+	@include respond-to(md) {
+		@include flex(row, space-between);
+		padding: $spacing-xl;
+	}
+
+	&__poster {
+		align-self: center;
+		max-width: 250px;
+		width: 100%;
+
+		@include respond-to(md) {
+			align-self: flex-start;
+		}
+	}
+
+	&__content {
+		flex: 1;
+		padding-block: $spacing-sm;
+
+		@include respond-to(md) {
+			padding-block: $spacing-md;
+		}
+	}
+
+	&__title {
+		margin-bottom: $spacing-md;
+	}
+
+	&__meta {
+		@include flex(row, flex-start, center, wrap);
+		border-bottom: 1px solid $color-border;
+		gap: $spacing-sm;
+		margin-bottom: $spacing-md;
+		padding-bottom: $spacing-md;
+
+		@include respond-to(md) {
+			display: block;
+			gap: $spacing-lg;
+		}
+	}
+
+	&__meta-item {
+		@include flex(row, align-center, center);
+		gap: $spacing-sm;
+		
+		@include mobile-only {
+			border: 1px solid $color-border;
+			border-radius: $border-radius-md;
+			padding: $spacing-xs $spacing-sm;
+		}
+	}
+
+	&__meta-label {
+		@include mobile-only {
+			display: none;
+		}
+	}
+
+	&__meta-label {
+		font-size: $font-size-sm;
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+
+	&__meta-value {
+		font-size: $font-size-xs;
+
+		@include respond-to(md) {
+			font-size: $font-size-sm;
+		}
+	}
+
+	&__overview-label {
+		font-size: $font-size-sm;
+		font-weight: 600;
+		text-transform: uppercase;
+		margin-bottom: $spacing-sm;
+	}
+
+	&__overview {
+		font-size: $font-size-sm;
+	}
+}

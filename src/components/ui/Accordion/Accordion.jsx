@@ -33,7 +33,7 @@ export default function Accordion({ children, title, isOpen: controlledIsOpen, o
 				>
 					{title}
 					<span className={`accordion__icon ${isOpen ? 'accordion__icon--open' : ''}`} aria-hidden='true'>
-						<ChevronDown size={20} />
+						<ChevronDown className='accordion__icon-svg' />
 					</span>
 				</button>
 			</h3>

@@ -24,7 +24,7 @@ export default function Search({ onSearch }) {
 					ref={inputRef}
 					type='text'
 				/>
-				<button className='search-form__button' type='submit'><SearchIcon size={20} /></button>
+				<button className='search-form__button' type='submit'><SearchIcon className='search-form__icon' /></button>
 			</div>
 		</form>
 	)
