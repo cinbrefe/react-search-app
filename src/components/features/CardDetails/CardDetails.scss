@@ -1,4 +1,4 @@
-@use '../../../styles/abstracts/variables' as *;
+@use '@/styles/abstracts/variables' as *;
 @use '@/styles/abstracts/mixins' as *;
 
 .card-details {
@@ -51,7 +51,7 @@
 	&__meta-item {
 		@include flex(row);
 		gap: $spacing-sm;
-		
+
 		@include mobile-only {
 			border: 1px solid $color-border;
 			border-radius: $border-radius-md;
@@ -60,15 +60,13 @@
 	}
 
 	&__meta-label {
-		@include mobile-only {
-			display: none;
-		}
-	}
-
-	&__meta-label {
 		font-size: $font-size-sm;
 		font-weight: 600;
 		text-transform: uppercase;
+
+		@include mobile-only {
+			display: none;
+		}
 	}
 
 	&__meta-value {
