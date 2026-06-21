@@ -1,15 +1,18 @@
 @use '@/styles/abstracts/variables' as *;
 
 .card {
-	background: none;
-	border: none;
-	cursor: pointer;
 	width: 100%;
+
+	&:hover &__image {
+		opacity: 0.8;
+		transform: scale(1.02);
+	}
 
 	&__image {
 		aspect-ratio: 2 / 3;
 		border-radius: $border-radius-md;
 		object-fit: cover;
+		transition: opacity 0.3s ease, transform 0.3s ease;
 		width: 100%;
 	}
 }

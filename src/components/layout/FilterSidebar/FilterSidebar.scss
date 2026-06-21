@@ -47,7 +47,7 @@
 	}
 
 	&__fieldset {
-		@include flex(row, align-start, center);
+		@include flex(row, flex-start, center);
 		border: none;
 		flex-wrap: wrap;
 		gap: $spacing-sm;

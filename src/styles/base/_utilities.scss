@@ -1,0 +1,40 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.container {
+	margin: 0 auto;
+	max-width: $breakpoint-xl;
+	padding: 0 $spacing-md;
+	width: 100%;
+
+	@include respond-to(md) {
+		padding: 0 $spacing-xl;
+	}
+}
+
+.visually-hidden {
+	border: 0;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+.skip-link {
+	left: 0;
+	position: absolute;
+	top: -100%;
+
+	&:focus {
+		top: 0;
+	}
+}
+
+.error-message {
+	text-align: center;
+	margin-block: $spacing-lg;
+}

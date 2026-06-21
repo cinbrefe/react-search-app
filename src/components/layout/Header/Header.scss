@@ -20,7 +20,7 @@
 		gap: $spacing-md;
 
 		@include respond-to(md) {
-			@include flex(row, space-between, center)
+			@include flex(row, space-between, center);
 		}
 	}
 }

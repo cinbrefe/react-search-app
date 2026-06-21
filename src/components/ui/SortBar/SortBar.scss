@@ -2,6 +2,13 @@
 @use '@/styles/abstracts/mixins' as *;
 
 .sort-bar {
+	@include flex(row, flex-start, center);
+	margin-bottom: $spacing-md;
+
+	@include respond-to(md) {
+		@include flex(row, flex-end, center);
+	}
+
 	&__label {
 		@include flex(row, flex-start, center);
 		gap: $spacing-md;

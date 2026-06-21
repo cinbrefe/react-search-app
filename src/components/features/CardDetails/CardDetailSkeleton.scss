@@ -1,13 +1,5 @@
 @use '@/styles/abstracts/variables' as *;
 @use '@/styles/abstracts/mixins' as *;
-@use '@/styles/abstracts/animations' as *;
-
-@mixin shimmer {
-	animation: shimmer 1.5s infinite;
-	background-size: 200% 100%;
-	background: linear-gradient(90deg, $color-surface 25%, $color-border 50%, $color-surface 75%);
-	border-radius: $border-radius-sm;
-}
 
 .card-detail-skeleton {
 	@include flex(column);

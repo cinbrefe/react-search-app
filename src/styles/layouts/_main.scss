@@ -2,20 +2,8 @@
 @use '../abstracts/mixins' as *;
 
 .app {
-	display: flex;
-	flex-direction: column;
+	@include flex(column);
 	position: relative;
-}
-
-.container {
-	margin: 0 auto;
-	max-width: $breakpoint-xl;
-	padding: 0 $spacing-md;
-	width: 100%;
-
-	@include respond-to(md) {
-		padding: 0 $spacing-xl;
-	}
 }
 
 .site-main {

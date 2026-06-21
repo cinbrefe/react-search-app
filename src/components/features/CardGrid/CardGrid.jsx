@@ -37,12 +37,12 @@ export default function CardGrid({ query, filters, onSelect }) {
 	if (loading) return (
 		<ul className='card-grid__list' role='list' aria-label='Loading movies'>
 			{Array.from({ length: 20 }).map((_, i) => (
-				<li key={i}><CardSkeleton /></li>
+				<li key={`skeleton-${i}`}><CardSkeleton /></li>
 			))}
 		</ul>
 	)
-	if (error) return <p role='status' aria-live='polite'>Error: {error.message}</p>
-	if (!data?.results?.length) return <p role='status' aria-live='polite'>{query ? `No results found for "${query}"` : 'No movies available.'}</p>
+	if (error) return <p className='error-message' role='status' aria-live='polite'>Something went wrong. Please try again later.</p>
+	if (!data?.results?.length) return <p className='error-message' role='status' aria-live='polite'>{query ? `No results found for "${query}"` : 'No movies available.'}</p>
 
 	const movies = data.results.filter(movie => movie.poster_path)
 

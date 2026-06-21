@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { RotateCcw } from 'lucide-react'
 
 import { INITIAL_FILTERS } from '@/constants/filters'
@@ -11,7 +11,15 @@ import '@/components/layout/FilterSidebar/FilterSidebar.scss'
 export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 	const [filters, setFilters] = useState(INITIAL_FILTERS)
 	const [activeAccordion, setActiveAccordion] = useState(null)
-	const isMobile = window.innerWidth < 768
+	const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+
+	useEffect(() => {
+		function handleResize() {
+			setIsMobile(window.innerWidth < 768)
+		}
+		window.addEventListener('resize', handleResize)
+		return () => window.removeEventListener('resize', handleResize)
+	}, [])
 
 	function handleAccordionToggle(id) {
 		if (isMobile) {
