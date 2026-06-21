@@ -1,0 +1,77 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+@use '@/styles/abstracts/animations' as *;
+
+@mixin shimmer {
+	animation: shimmer 1.5s infinite;
+	background-size: 200% 100%;
+	background: linear-gradient(90deg, $color-surface 25%, $color-border 50%, $color-surface 75%);
+	border-radius: $border-radius-sm;
+}
+
+.card-detail-skeleton {
+	@include flex(column);
+	gap: $spacing-xl;
+	padding: $spacing-md;
+
+	@include respond-to(md) {
+		@include flex(row, space-between);
+		padding: $spacing-xl;
+	}
+
+	&__poster {
+		@include shimmer;
+		align-self: center;
+		aspect-ratio: 2 / 3;
+		max-width: 250px;
+		width: 100%;
+
+		@include respond-to(md) {
+			align-self: flex-start;
+		}
+	}
+
+	&__content {
+		@include flex(column);
+		flex: 1;
+		gap: $spacing-md;
+		padding-block: $spacing-sm;
+
+		@include respond-to(md) {
+			padding-block: $spacing-md;
+		}
+	}
+
+	&__title {
+		@include shimmer;
+		height: 32px;
+		width: 60%;
+	}
+
+	&__meta {
+		@include flex(row);
+		gap: $spacing-sm;
+	}
+
+	&__meta-item {
+		@include shimmer;
+		height: 16px;
+		width: 80px;
+	}
+
+	&__overview-label {
+		@include shimmer;
+		height: 14px;
+		width: 80px;
+	}
+
+	&__overview {
+		@include shimmer;
+		height: 14px;
+		width: 100%;
+
+		&:last-child {
+			width: 70%;
+		}
+	}
+}

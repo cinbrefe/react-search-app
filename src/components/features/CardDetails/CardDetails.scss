@@ -13,6 +13,7 @@
 
 	&__poster {
 		align-self: center;
+		border-radius: $border-radius-md;
 		max-width: 250px;
 		width: 100%;
 
@@ -42,13 +43,13 @@
 		padding-bottom: $spacing-md;
 
 		@include respond-to(md) {
-			display: block;
-			gap: $spacing-lg;
+			@include flex(column);
+			gap: $spacing-xs;
 		}
 	}
 
 	&__meta-item {
-		@include flex(row, align-center, center);
+		@include flex(row);
 		gap: $spacing-sm;
 		
 		@include mobile-only {
@@ -81,8 +82,8 @@
 	&__overview-label {
 		font-size: $font-size-sm;
 		font-weight: 600;
-		text-transform: uppercase;
 		margin-bottom: $spacing-sm;
+		text-transform: uppercase;
 	}
 
 	&__overview {

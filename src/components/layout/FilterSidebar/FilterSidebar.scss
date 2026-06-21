@@ -24,8 +24,8 @@
 	&__header {
 		@include flex(row, space-between, center);
 		border-bottom: 1px solid $color-border;
-		padding-bottom: $spacing-md;
 		margin-bottom: $spacing-md;
+		padding-bottom: $spacing-md;
 	}
 
 	&__disabled-message {

@@ -4,7 +4,7 @@ import { API_BASE_URL, TMDB_API_KEY } from '@/constants/api'
 import useFetch from '@/hooks/useFetch'
 
 import Card from '@/components/features/Card/Card'
-import Loading from '@/components/ui/Loading/Loading'
+import CardSkeleton from '@/components/features/Card/CardSkeleton'
 import Pagination from '@/components/ui/Pagination/Pagination'
 
 import '@/components/features/CardGrid/CardGrid.scss'
@@ -34,7 +34,13 @@ export default function CardGrid({ query, filters, onSelect }) {
 
 	const { data, loading, error } = useFetch(url)
 
-	if (loading) return <Loading message={query ? `Searching for "${query}"...` : 'Loading movies...'} />
+	if (loading) return (
+		<ul className='card-grid__list' role='list' aria-label='Loading movies'>
+			{Array.from({ length: 20 }).map((_, i) => (
+				<li key={i}><CardSkeleton /></li>
+			))}
+		</ul>
+	)
 	if (error) return <p role='status' aria-live='polite'>Error: {error.message}</p>
 	if (!data?.results?.length) return <p role='status' aria-live='polite'>{query ? `No results found for "${query}"` : 'No movies available.'}</p>
 
