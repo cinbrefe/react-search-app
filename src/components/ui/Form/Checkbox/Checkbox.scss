@@ -6,7 +6,7 @@
 	align-items: center;
 	cursor: pointer;
 	display: flex;
-	gap: 8px;
+	gap: $spacing-sm;
 	justify-content: flex-start;
 
 	@include mobile-only {   

@@ -18,14 +18,14 @@ export default function YearRangeFilter({ value, onChange }) {
 		const yearFrom = event.target.value
 		setLocalFrom(yearFrom)
 		clearTimeout(debounceRef.current)
-		debounceRef.current = setTimeout(() => onChange({ yearFrom, yearTo: value.yearTo }), 500)
+		debounceRef.current = setTimeout(() => onChange({ yearFrom, yearTo: localTo }), 500)
 	}
 
 	function handleToChange(event) {
 		const yearTo = event.target.value
 		setLocalTo(yearTo)
 		clearTimeout(debounceRef.current)
-		debounceRef.current = setTimeout(() => onChange({ yearFrom: value.yearFrom, yearTo }), 500)
+		debounceRef.current = setTimeout(() => onChange({ yearFrom: localFrom, yearTo }), 500)
 	}
 
 	return (

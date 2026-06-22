@@ -11,6 +11,12 @@
 		right: $spacing-md;
 		top: 50%;
 		transform: translateY(-50%);
+		transition: color 0.3s ease;
+
+		&:hover,
+		&:focus {
+			color: $color-text;
+		}
 
 		.search-form__icon {
 			@include icon(20px);

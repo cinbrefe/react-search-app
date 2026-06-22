@@ -1,7 +1,7 @@
 @use '@/styles/abstracts/variables' as *;
 @use '@/styles/abstracts/mixins' as *;
 
-.card-detail-skeleton {
+.card-details-skeleton {
 	@include flex(column);
 	gap: $spacing-xl;
 	padding: $spacing-md;
