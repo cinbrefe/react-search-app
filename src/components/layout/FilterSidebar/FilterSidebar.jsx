@@ -1,3 +1,8 @@
+// Props:
+//	onFilter (function)
+//	disabled (boolean)
+//	onClearSearch (function)
+
 import { useState, useEffect } from 'react'
 import { RotateCcw } from 'lucide-react'
 
@@ -18,6 +23,7 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 			setIsMobile(window.innerWidth < 768)
 		}
 		window.addEventListener('resize', handleResize)
+
 		return () => window.removeEventListener('resize', handleResize)
 	}, [])
 
@@ -64,6 +70,7 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 				)}
 			</div>
 
+			{/* TMDB search and discover are separate endpoints — filters only work with discover, not search */}
 			{disabled && (
 				<p className='filter-sidebar__disabled-message'>
 					Filters are not available while searching.{' '}

@@ -24,7 +24,8 @@ function App() {
 						<FilterSidebar onFilter={setFilters} disabled={!!query} onClearSearch={handleClearSearch} />
 						<div className='site-main__content'>
 							<SortBar value={filters.sortBy} onChange={handleSortChange} />
-							<CardGrid key={`${query}-${JSON.stringify(filters)}`} query={query} filters={filters} onSelect={setSelectedId} />
+							{/* key forces remount on query/filter change, which resets currentPage to 1 */}
+						<CardGrid key={`${query}-${JSON.stringify(filters)}`} query={query} filters={filters} onSelect={setSelectedId} />
 						</div>
 					</div>
 				</main>

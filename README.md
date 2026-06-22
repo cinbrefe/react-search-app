@@ -101,7 +101,7 @@ This project follows WAI-ARIA best practices to ensure an inclusive experience f
 - **Modal** — uses native `<dialog>` element with `aria-modal`, `aria-label`, and `aria-describedby`; `Escape` key closes the modal
 - **Accordion** — implements `aria-expanded` and `aria-controls` following the WAI-ARIA disclosure pattern
 - **Pagination** — wrapped in `<nav aria-label="Pagination">`; each button has a descriptive `aria-label` and `aria-current="page"` for the active page
-- **Card list** — uses `role="list"` with a contextual `aria-label` that reflects search or browse state
+- **Card list** — uses a contextual `aria-label` that reflects search or browse state
 - **Form controls** — all inputs, selects, and checkboxes have associated `<label>` elements via `htmlFor`/`id`
 - **Filter groups** — grouped with `role="group"` and `aria-label` for context
 - **Buttons** — all icon-only buttons have `aria-label` for screen reader context

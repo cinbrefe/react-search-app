@@ -1,3 +1,9 @@
+// Props:
+//	children (node)
+//	isOpen (boolean)
+//	onClose (function)
+//	label (string)
+
 import { useRef, useEffect, useId } from 'react'
 import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
@@ -25,7 +31,6 @@ export default function Modal({ children, isOpen, onClose, label }) {
 			aria-label={label}
 			aria-describedby={descriptionId}
 			onCancel={onClose}
-			onClick={e => { if (e.target === dialog.current) onClose() }}
 			ref={dialog}
 		>
 			<button

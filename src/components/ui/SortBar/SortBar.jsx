@@ -1,3 +1,7 @@
+// Props:
+//	value (string or number)
+//	onChange (function)
+
 import { SORT_OPTIONS } from '@/constants/filters'
 
 import Dropdown from '@/components/ui/Form/Dropdown/Dropdown'

@@ -1,3 +1,9 @@
+// Props:
+//	id (string)
+//	options (array of { value: string or number, label: string })
+//	value (string or number)
+//	onChange (function)
+
 import '@/components/ui/Form/Dropdown/Dropdown.scss'
 
 export default function Dropdown({ id, options, value, onChange }) {

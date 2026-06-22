@@ -1,3 +1,8 @@
+// Props:
+//	query (string)
+//	filters (object)
+//	onSelect (function)
+
 import { useState } from 'react'
 
 import { API_BASE_URL, TMDB_API_KEY } from '@/constants/api'
@@ -35,7 +40,7 @@ export default function CardGrid({ query, filters, onSelect }) {
 	const { data, loading, error } = useFetch(url)
 
 	if (loading) return (
-		<ul className='card-grid__list' role='list' aria-label='Loading movies'>
+		<ul className='card-grid__list' aria-label='Loading movies'>
 			{Array.from({ length: 20 }).map((_, i) => (
 				<li key={`skeleton-${i}`}><CardSkeleton /></li>
 			))}
@@ -48,7 +53,7 @@ export default function CardGrid({ query, filters, onSelect }) {
 
 	return (
 		<div className='card-grid'>
-			<ul className='card-grid__list' role='list' aria-label={query ? `Search results for "${query}"` : 'Popular movies'}>
+			<ul className='card-grid__list' aria-label={query ? `Search results for "${query}"` : 'Popular movies'}>
 				{movies.map(movie => (
 					<li key={movie.id}>
 						<Card

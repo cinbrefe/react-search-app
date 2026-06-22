@@ -1,7 +1,11 @@
+// Props:
+//	value (object: { yearFrom: string, yearTo: string })
+//	onChange (function)
+
 import { useRef, useEffect, useState } from 'react'
 
 export default function YearRangeFilter({ value, onChange }) {
-	const debounceRef = useRef(null)
+	const debounceRef = useRef(null) // delays onChange by 500ms so it doesn't fire on every keystroke
 	const [localFrom, setLocalFrom] = useState(value.yearFrom)
 	const [localTo, setLocalTo] = useState(value.yearTo)
 

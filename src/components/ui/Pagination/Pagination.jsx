@@ -1,8 +1,7 @@
-// Windowed pagination component
 // Props:
-//	currentPage - the current active page (number)
-//	totalPages  - total number of pages available (number)
-//	onPageChange - callback fired with the new page number when user navigates
+//	currentPage (number)
+//	totalPages (number)
+//	onPageChange (function)
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import '@/components/ui/Pagination/Pagination.scss'

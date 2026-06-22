@@ -1,3 +1,7 @@
+// Props:
+//	value (number)
+//	onChange (function)
+
 import { RATINGS } from '@/constants/filters'
 
 import Checkbox from '@/components/ui/Form/Checkbox/Checkbox'

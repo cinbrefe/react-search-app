@@ -1,4 +1,10 @@
-import '@/components/ui/Form/Checkbox/Checkbox.scss';
+// Props:
+//	label (string)
+//	value (string or number)
+//	checked (boolean)
+//	onChange (function)
+
+import '@/components/ui/Form/Checkbox/Checkbox.scss'
 
 export default function Checkbox({ label, value, checked, onChange }) {
 	const id = `checkbox-${value}`

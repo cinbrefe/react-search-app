@@ -1,3 +1,10 @@
+// Returns:
+//	query (string), setQuery (function)
+//	filters (object), setFilters (function)
+//	selectedId (number | null), setSelectedId (function)
+//	handleSortChange (function)
+//	handleClearSearch (function)
+
 import { useState } from 'react'
 import { INITIAL_FILTERS } from '@/constants/filters'
 

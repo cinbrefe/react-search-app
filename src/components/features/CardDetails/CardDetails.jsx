@@ -1,3 +1,6 @@
+// Props:
+//	id (number)
+
 import useFetch from '@/hooks/useFetch'
 
 import { API_BASE_URL, IMAGE_BASE_URL, TMDB_API_KEY } from '@/constants/api'

@@ -1,3 +1,7 @@
+// Props:
+//	fallback (node, optional)
+//	children (node)
+
 import { Component } from 'react'
 
 export default class ErrorBoundary extends Component {
@@ -6,7 +10,7 @@ export default class ErrorBoundary extends Component {
 		this.state = { hasError: false }
 	}
 
-	static getDerivedStateFromError(_error) {
+	static getDerivedStateFromError() {
 		return { hasError: true }
 	}
 
@@ -18,7 +22,7 @@ export default class ErrorBoundary extends Component {
 		if (this.state.hasError) {
 			return this.props.fallback ?? <p className='error-message'>Something went wrong. Please try again.</p>
 		}
-		
+
 		return this.props.children
 	}
 }

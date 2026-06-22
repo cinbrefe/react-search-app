@@ -1,3 +1,10 @@
+// Params:
+//	url (string | null) — pass null to skip the fetch
+// Returns:
+//	data (object | null)
+//	loading (boolean)
+//	error (Error | null)
+
 import { useReducer, useEffect } from 'react'
 
 const initialState = { data: null, loading: false, error: null }
@@ -15,8 +22,8 @@ const useFetch = (url) => {
 	const [state, dispatch] = useReducer(reducer, initialState)
 
 	useEffect(() => {
-		if (!url) return
-		const controller = new AbortController()
+		if (!url) return // allows callers to conditionally skip fetching by passing null
+		const controller = new AbortController() // cancels the request if url changes or component unmounts
 		dispatch({ type: 'FETCH_START' })
 		fetch(url, { signal: controller.signal })
 			.then(res => {
@@ -25,7 +32,7 @@ const useFetch = (url) => {
 			})
 			.then(data => dispatch({ type: 'FETCH_SUCCESS', payload: data }))
 			.catch(err => {
-				if (err.name === 'AbortError') return
+				if (err.name === 'AbortError') return // ignore intentional cancellations
 				dispatch({ type: 'FETCH_ERROR', payload: err instanceof Error ? err : new Error(String(err)) })
 			})
 		return () => controller.abort()

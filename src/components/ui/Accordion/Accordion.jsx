@@ -1,3 +1,9 @@
+// Props:
+//	children (node)
+//	title (string)
+//	isOpen (boolean, optional)
+//	onToggle (function, optional)
+
 import { useState, useId } from 'react'
 import { ChevronDown } from 'lucide-react'
 
@@ -9,6 +15,7 @@ export default function Accordion({ children, title, isOpen: controlledIsOpen, o
 	const headerId = `accordion-header-${uniqueId}`
 	const panelId = `accordion-panel-${uniqueId}`
 
+	// Supports controlled (parent manages isOpen) and uncontrolled (manages own state) modes
 	const isControlled = controlledIsOpen !== undefined
 	const isOpen = isControlled ? controlledIsOpen : internalIsOpen
 

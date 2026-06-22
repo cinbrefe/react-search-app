@@ -1,3 +1,6 @@
+// Props:
+//	onSearch (function)
+
 import { useRef } from 'react'
 import { Search as SearchIcon } from 'lucide-react'
 

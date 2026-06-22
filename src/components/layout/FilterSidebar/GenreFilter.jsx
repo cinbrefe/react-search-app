@@ -1,3 +1,7 @@
+// Props:
+//	value (array of genre ids)
+//	onChange (function)
+
 import { GENRES } from '@/constants/filters'
 
 import Checkbox from '@/components/ui/Form/Checkbox/Checkbox'

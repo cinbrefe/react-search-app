@@ -1,3 +1,6 @@
+// Props:
+//	onSearch (function)
+
 import Search from '@/components/ui/Search/Search'
 
 import logo from '@/assets/tmdb-logo.svg'
