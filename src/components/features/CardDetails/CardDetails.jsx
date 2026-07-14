@@ -3,12 +3,12 @@
 
 import useFetch from '@/hooks/useFetch'
 
-import { API_BASE_URL, IMAGE_BASE_URL, TMDB_API_KEY } from '@/constants/api'
+import { API_BASE_URL, IMAGE_BASE_URL } from '@/constants/api'
 import CardDetailSkeleton from '@/components/features/CardDetails/CardDetailSkeleton'
 import '@/components/features/CardDetails/CardDetails.scss'
 
 export default function CardDetails({ id }) {
-	const { data, loading, error } = useFetch(id ? `${API_BASE_URL}/movie/${id}?api_key=${TMDB_API_KEY}` : null)
+	const { data, loading, error } = useFetch(id ? `${API_BASE_URL}/movie/${id}` : null)
 
 	if (loading) return <CardDetailSkeleton />
 	if (error) return <p>Error: {error.message}</p>

@@ -73,8 +73,9 @@ src/
    ```
 3. Create a `.env` file and add your TMDB API key:
    ```
-   VITE_TMDB_API_KEY=your_api_key_here
+   TMDB_API_KEY=your_api_key_here
    ```
+   > The key uses no `VITE_` prefix — it is read only by the dev-server proxy and the Vercel serverless function, never bundled into client code. Also set this variable in your Vercel project's Environment Variables before deploying.
 4. Start the dev server:
    ```bash
    npm run dev

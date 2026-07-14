@@ -5,7 +5,7 @@
 
 import { useState } from 'react'
 
-import { API_BASE_URL, TMDB_API_KEY } from '@/constants/api'
+import { API_BASE_URL } from '@/constants/api'
 import useFetch from '@/hooks/useFetch'
 
 import Card from '@/components/features/Card/Card'
@@ -14,11 +14,8 @@ import Pagination from '@/components/ui/Pagination/Pagination'
 
 import '@/components/features/CardGrid/CardGrid.scss'
 
-function buildDiscoverParams(filters, page, apiKey) {
-	const params = new URLSearchParams({
-		api_key: apiKey,
-		page,
-	})
+function buildDiscoverParams(filters, page) {
+	const params = new URLSearchParams({ page })
 	const sortBy = filters?.sortBy || 'popularity.desc'
 	params.set('sort_by', sortBy)
 	if (sortBy === 'vote_average.desc') params.set('vote_count.gte', 200)
@@ -36,8 +33,8 @@ export default function CardGrid({ query, filters, onSelect }) {
 	const [currentPage, setCurrentPage] = useState(1)
 
 	const url = query
-		? `${API_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&page=${currentPage}`
-		: `${API_BASE_URL}/discover/movie?${buildDiscoverParams(filters, currentPage, TMDB_API_KEY)}`
+		? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&page=${currentPage}`
+		: `${API_BASE_URL}/discover/movie?${buildDiscoverParams(filters, currentPage)}`
 
 	const { data, loading, error } = useFetch(url)
 
