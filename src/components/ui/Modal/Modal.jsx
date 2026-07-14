@@ -1,6 +1,5 @@
 // Props:
 //	children (node)
-//	isOpen (boolean)
 //	onClose (function)
 //	label (string)
 
@@ -10,19 +9,23 @@ import { X } from 'lucide-react'
 
 import '@/components/ui/Modal/Modal.scss'
 
-export default function Modal({ children, isOpen, onClose, label }) {
+export default function Modal({ children, onClose, label }) {
 	const dialog = useRef()
 	const descriptionId = useId()
 
 	useEffect(() => {
-		if (isOpen) {
-			dialog.current.showModal()
-			document.body.style.overflow = 'hidden'
-		} else if (dialog.current.open) {
-			dialog.current.close()
+		const el = dialog.current
+		const handleBackdropClick = (e) => { if (e.target === el) onClose() }
+
+		el.showModal()
+		document.body.style.overflow = 'hidden'
+		el.addEventListener('click', handleBackdropClick)
+
+		return () => {
+			el.removeEventListener('click', handleBackdropClick)
 			document.body.style.overflow = ''
 		}
-	}, [isOpen])
+	}, [onClose])
 
 	return createPortal(
 		<dialog

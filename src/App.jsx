@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import { useAppState } from '@/hooks/useAppState'
 
 import CardDetails from '@/components/features/CardDetails/CardDetails'
@@ -10,13 +12,16 @@ import SortBar from '@/components/ui/SortBar/SortBar'
 
 function App() {
 	const { query, setQuery, filters, setFilters, selectedId, setSelectedId, handleSortChange, handleClearSearch } = useAppState()
+	const handleCloseModal = useCallback(() => setSelectedId(null), [setSelectedId])
 
 	return (
 		<div className='app'>
 			<ErrorBoundary>
-				<Modal isOpen={selectedId !== null} onClose={() => setSelectedId(null)} label='Movie details'>
-					<CardDetails id={selectedId} />
-				</Modal>
+				{selectedId !== null && (
+					<Modal onClose={handleCloseModal} label='Movie details'>
+						<CardDetails id={selectedId} />
+					</Modal>
+				)}
 				<a href='#site-main' className='skip-link'>Skip to main content</a>
 				<Header onSearch={setQuery} />
 				<main id='site-main' className='site-main'>
