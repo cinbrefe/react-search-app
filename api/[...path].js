@@ -1,4 +1,4 @@
-// Vercel serverless function — proxies requests to TMDB.
+// Vercel serverless function — proxies all /api/tmdb/* requests to TMDB.
 // The API key lives only in the server-side TMDB_API_KEY env var, so it is
 // never shipped to the browser or exposed in network requests.
 
@@ -15,9 +15,12 @@ export default async function handler(req, res) {
 		return res.status(500).json({ error: 'Server misconfiguration: TMDB_API_KEY is not set' })
 	}
 
-	// The [...path] catch-all exposes the trailing segments as req.query.path
-	const segments = Array.isArray(req.query.path) ? req.query.path : [req.query.path].filter(Boolean)
-	const pathname = segments.map(encodeURIComponent).join('/')
+	// req.query.path is the catch-all — strip the leading 'tmdb' segment
+	const segments = (Array.isArray(req.query.path) ? req.query.path : [req.query.path]).filter(Boolean)
+	if (segments[0] !== 'tmdb') {
+		return res.status(404).json({ error: 'Not found' })
+	}
+	const tmdbPath = segments.slice(1).join('/')
 
 	// Forward every incoming query param except the internal `path`, then attach the key
 	const params = new URLSearchParams()
@@ -29,7 +32,7 @@ export default async function handler(req, res) {
 	params.set('api_key', apiKey)
 
 	try {
-		const tmdbRes = await fetch(`${TMDB_BASE_URL}/${pathname}?${params.toString()}`)
+		const tmdbRes = await fetch(`${TMDB_BASE_URL}/${tmdbPath}?${params.toString()}`)
 		const body = await tmdbRes.text()
 		res.setHeader('Content-Type', 'application/json')
 		res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400')
