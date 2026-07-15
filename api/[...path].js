@@ -15,8 +15,10 @@ export default async function handler(req, res) {
 		return res.status(500).json({ error: 'Server misconfiguration: TMDB_API_KEY is not set' })
 	}
 
-	// req.query.path is the catch-all — strip the leading 'tmdb' segment
-	const segments = (Array.isArray(req.query.path) ? req.query.path : [req.query.path]).filter(Boolean)
+	// req.query.path may be a string ('tmdb/discover/movie') or array (['tmdb','discover','movie'])
+	// depending on whether routing came via a rewrite or direct catch-all match
+	const rawPath = Array.isArray(req.query.path) ? req.query.path.join('/') : (req.query.path || '')
+	const segments = rawPath.split('/').filter(Boolean)
 	if (segments[0] !== 'tmdb') {
 		return res.status(404).json({ error: 'Not found' })
 	}
