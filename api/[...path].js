@@ -20,10 +20,10 @@ export default async function handler(req, res) {
 		return res.status(200).json({ url: req.url, query: req.query })
 	}
 
-	// req.query.path may be a string ('tmdb/discover/movie') or array (['tmdb','discover','movie'])
-	// depending on whether routing came via a rewrite or direct catch-all match
-	const rawPath = Array.isArray(req.query.path) ? req.query.path.join('/') : (req.query.path || '')
-	const segments = rawPath.split('/').filter(Boolean)
+	// Extract the TMDB sub-path from the request URL (req.query.path is not
+	// populated when the function is reached via a vercel.json rewrite rule)
+	const urlPathname = new URL(req.url, 'http://localhost').pathname
+	const segments = urlPathname.replace(/^\/api\//, '').split('/').filter(Boolean)
 	if (segments[0] !== 'tmdb') {
 		return res.status(404).json({ error: 'Not found' })
 	}
