@@ -30,4 +30,11 @@ export default defineConfig([
 			'jsx-a11y/anchor-is-valid': 'warn',
 		},
 	},
+	{
+		// Files that run in Node (Vercel functions, build config, tests), not the browser
+		files: ['api/**/*.js', '*.config.js', 'tests/**/*.js'],
+		languageOptions: {
+			globals: globals.node,
+		},
+	},
 ])
