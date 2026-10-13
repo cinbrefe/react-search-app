@@ -15,11 +15,6 @@ export default async function handler(req, res) {
 		return res.status(500).json({ error: 'Server misconfiguration: TMDB_API_KEY is not set' })
 	}
 
-	// Temporary debug — remove after confirming routing
-	if (req.url?.includes('_debug')) {
-		return res.status(200).json({ url: req.url, query: req.query })
-	}
-
 	// Extract the TMDB sub-path from the request URL (req.query.path is not
 	// populated when the function is reached via a vercel.json rewrite rule)
 	const urlPathname = new URL(req.url, 'http://localhost').pathname
