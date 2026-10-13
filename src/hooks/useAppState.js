@@ -1,6 +1,6 @@
 // Returns:
 //	query (string), setQuery (function)
-//	filters (object), setFilters (function)
+//	filters (object), handleFiltersChange (function)
 //	selectedId (number | null), setSelectedId (function)
 //	handleSortChange (function)
 //	handleClearSearch (function)
@@ -13,6 +13,11 @@ export function useAppState() {
 	const [filters, setFilters] = useState(INITIAL_FILTERS)
 	const [selectedId, setSelectedId] = useState(null)
 
+	// FilterSidebar sends its whole filters object, which never tracks sortBy — keep the current sort
+	function handleFiltersChange(sidebarFilters) {
+		setFilters(prev => ({ ...sidebarFilters, sortBy: prev.sortBy }))
+	}
+
 	function handleSortChange(value) {
 		setFilters(prev => ({ ...prev, sortBy: value }))
 	}
@@ -21,5 +26,5 @@ export function useAppState() {
 		setQuery('')
 	}
 
-	return { query, setQuery, filters, setFilters, selectedId, setSelectedId, handleSortChange, handleClearSearch }
+	return { query, setQuery, filters, handleFiltersChange, selectedId, setSelectedId, handleSortChange, handleClearSearch }
 }
