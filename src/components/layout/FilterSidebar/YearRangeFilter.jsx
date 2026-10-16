@@ -8,11 +8,14 @@ export default function YearRangeFilter({ value, onChange }) {
 	const debounceRef = useRef(null) // delays onChange by 500ms so it doesn't fire on every keystroke
 	const [localFrom, setLocalFrom] = useState(value.yearFrom)
 	const [localTo, setLocalTo] = useState(value.yearTo)
+	const [prevValue, setPrevValue] = useState(value)
 
-	useEffect(() => {
+	// Sync the inputs when the parent changes the years (e.g. Reset Filters) — done during render, not in an effect
+	if (value.yearFrom !== prevValue.yearFrom || value.yearTo !== prevValue.yearTo) {
+		setPrevValue(value)
 		setLocalFrom(value.yearFrom)
 		setLocalTo(value.yearTo)
-	}, [value.yearFrom, value.yearTo])
+	}
 
 	useEffect(() => {
 		return () => clearTimeout(debounceRef.current)
