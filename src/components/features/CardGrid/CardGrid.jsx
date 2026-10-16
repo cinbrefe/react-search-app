@@ -2,8 +2,9 @@
 //	query (string)
 //	filters (object)
 //	onSelect (function)
+//	onStatusChange (function) — receives a message for screen readers when results, errors or "no results" appear
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { API_BASE_URL } from '@/constants/api'
 import useFetch from '@/hooks/useFetch'
@@ -36,7 +37,7 @@ function buildDiscoverParams(filters, page) {
 	return params.toString()
 }
 
-export default function CardGrid({ query, filters, onSelect }) {
+export default function CardGrid({ query, filters, onSelect, onStatusChange }) {
 	const [currentPage, setCurrentPage] = useState(1)
 
 	const url = query
@@ -45,15 +46,25 @@ export default function CardGrid({ query, filters, onSelect }) {
 
 	const { data, loading, error } = useFetch(url)
 
+	// Announced through App's status region, which (unlike this component) isn't remounted on every search
+	useEffect(() => {
+		if (error) onStatusChange('Something went wrong. Please try again later.')
+		else if (data && !data.results?.length) onStatusChange(query ? `No results found for "${query}"` : 'No movies available.')
+		else if (data) {
+			const total = data.total_results.toLocaleString('en-US')
+			onStatusChange(`${query ? `${total} results for "${query}"` : `${total} movies`}, page ${currentPage}`)
+		}
+	}, [data, error, query, currentPage, onStatusChange])
+
 	if (loading) return (
-		<ul className='card-grid__list' aria-label='Loading movies'>
+		<ul className='card-grid__list' aria-label='Loading movies' aria-busy='true'>
 			{Array.from({ length: 20 }).map((_, i) => (
 				<li key={`skeleton-${i}`}><CardSkeleton /></li>
 			))}
 		</ul>
 	)
-	if (error) return <p className='error-message' role='status' aria-live='polite'>Something went wrong. Please try again later.</p>
-	if (!data?.results?.length) return <p className='error-message' role='status' aria-live='polite'>{query ? `No results found for "${query}"` : 'No movies available.'}</p>
+	if (error) return <p className='error-message'>Something went wrong. Please try again later.</p>
+	if (!data?.results?.length) return <p className='error-message'>{query ? `No results found for "${query}"` : 'No movies available.'}</p>
 
 	const movies = data.results.filter(movie => movie.poster_path)
 

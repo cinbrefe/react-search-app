@@ -12,7 +12,7 @@ import Modal from '@/components/ui/Modal/Modal'
 import SortBar from '@/components/ui/SortBar/SortBar'
 
 function App() {
-	const { query, setQuery, filters, handleFiltersChange, selectedId, setSelectedId, handleSortChange, handleClearSearch } = useAppState()
+	const { query, setQuery, filters, handleFiltersChange, selectedId, setSelectedId, handleSortChange, handleClearSearch, statusMessage, setStatusMessage } = useAppState()
 	const handleCloseModal = useCallback(() => setSelectedId(null), [setSelectedId])
 
 	return (
@@ -29,9 +29,10 @@ function App() {
 					<div className='container site-main__container'>
 						<FilterSidebar onFilter={handleFiltersChange} disabled={!!query} onClearSearch={handleClearSearch} />
 						<div className='site-main__content'>
+							<p className='visually-hidden' role='status'>{statusMessage}</p>
 							<SortBar value={filters.sortBy} onChange={handleSortChange} disabled={!!query} />
 							{/* key forces remount on query/filter change, which resets currentPage to 1 */}
-							<CardGrid key={`${query}-${JSON.stringify(filters)}`} query={query} filters={filters} onSelect={setSelectedId} />
+							<CardGrid key={`${query}-${JSON.stringify(filters)}`} query={query} filters={filters} onSelect={setSelectedId} onStatusChange={setStatusMessage} />
 						</div>
 					</div>
 				</main>
