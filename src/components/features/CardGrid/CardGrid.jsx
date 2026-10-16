@@ -15,7 +15,7 @@ import Pagination from '@/components/ui/Pagination/Pagination'
 import '@/components/features/CardGrid/CardGrid.scss'
 
 function buildDiscoverParams(filters, page) {
-	const params = new URLSearchParams({ page })
+	const params = new URLSearchParams({ page, include_adult: false })
 	const sortBy = filters?.sortBy || 'popularity.desc'
 	params.set('sort_by', sortBy)
 	if (sortBy === 'vote_average.desc') params.set('vote_count.gte', 200)
@@ -33,7 +33,7 @@ export default function CardGrid({ query, filters, onSelect }) {
 	const [currentPage, setCurrentPage] = useState(1)
 
 	const url = query
-		? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&page=${currentPage}`
+		? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&page=${currentPage}&include_adult=false`
 		: `${API_BASE_URL}/discover/movie?${buildDiscoverParams(filters, currentPage)}`
 
 	const { data, loading, error } = useFetch(url)
