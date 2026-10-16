@@ -26,6 +26,13 @@ function buildDiscoverParams(filters, page) {
 	}
 	if (filters?.yearFrom) params.set('primary_release_date.gte', `${filters.yearFrom}-01-01`)
 	if (filters?.yearTo) params.set('primary_release_date.lte', `${filters.yearTo}-12-31`)
+	if (sortBy === 'release_date.desc') {
+		// Newest first would otherwise start with unreleased films that have no votes yet
+		const today = new Date().toISOString().slice(0, 10)
+		const releasedBy = params.get('primary_release_date.lte')
+		if (!releasedBy || releasedBy > today) params.set('primary_release_date.lte', today)
+		if (!params.has('vote_count.gte')) params.set('vote_count.gte', 10)
+	}
 	return params.toString()
 }
 
