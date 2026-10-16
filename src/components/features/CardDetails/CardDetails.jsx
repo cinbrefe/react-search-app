@@ -45,7 +45,7 @@ export default function CardDetails({ id }) {
 						<dd className='card-details__meta-value'>{genres?.map(g => g.name).join(', ')}</dd>
 					</div>
 				</dl>
-				<p className='card-details__overview-label'>Overview</p>
+				<h3 className='card-details__overview-label'>Overview</h3>
 				<p className='card-details__overview'>{overview}</p>
 			</div>
 		</div>
