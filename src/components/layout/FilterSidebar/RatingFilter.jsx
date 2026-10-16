@@ -1,22 +1,30 @@
 // Props:
-//	value (number)
+//	value (number or '')
 //	onChange (function)
 
 import { RATINGS } from '@/constants/filters'
 
-import Checkbox from '@/components/ui/Form/Checkbox/Checkbox'
+import Radio from '@/components/ui/Form/Radio/Radio'
 
 export default function RatingFilter({ value, onChange }) {
 	function handleChange(event) {
-		const rating = Number(event.target.value)
-		onChange(event.target.checked ? rating : '')
+		const rating = event.target.value
+		onChange(rating === '' ? '' : Number(rating))
 	}
 
 	return (
-		<div className='filter-sidebar__group' role='group' aria-label='Rating'>
+		<div className='filter-sidebar__group' role='radiogroup' aria-label='Minimum rating'>
+			<Radio
+				name='rating'
+				label='Any'
+				value=''
+				checked={value === ''}
+				onChange={handleChange}
+			/>
 			{RATINGS.map(r => (
-				<Checkbox
+				<Radio
 					key={r}
+					name='rating'
 					label={`${r}+`}
 					value={r}
 					checked={value === r}
