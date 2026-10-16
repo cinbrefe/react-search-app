@@ -13,24 +13,21 @@
 }
 
 .visually-hidden {
-	border: 0;
-	clip: rect(0, 0, 0, 0);
-	height: 1px;
-	margin: -1px;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	white-space: nowrap;
-	width: 1px;
+	@include visually-hidden;
 }
 
 .skip-link {
-	left: 0;
+	background-color: $color-surface;
+	border-radius: $border-radius-md;
+	color: $color-text;
+	left: $spacing-md;
+	padding: $spacing-sm $spacing-md;
 	position: absolute;
 	top: -100%;
+	z-index: 100;
 
 	&:focus {
-		top: 0;
+		top: $spacing-md;
 	}
 }
 
