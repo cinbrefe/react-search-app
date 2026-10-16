@@ -21,6 +21,18 @@ body {
 	outline-offset: 2px;
 }
 
+// Less motion for people who ask for it in their OS settings: no shimmer, transitions or smooth scrolling
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
 ::placeholder {
 	color: $color-text-muted;
 	font-family: $font-family-base;

@@ -6,6 +6,10 @@
 	&:hover &__image {
 		opacity: 0.8;
 		transform: scale(1.02);
+
+		@media (prefers-reduced-motion: reduce) {
+			transform: none;
+		}
 	}
 
 	&__image {

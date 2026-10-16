@@ -98,6 +98,7 @@ This project follows WAI-ARIA best practices to ensure an inclusive experience f
 - **Semantic HTML** — uses native elements (`<header>`, `<main>`, `<aside>`, `<nav>`, `<dialog>`, `<fieldset>`, `<legend>`) for correct landmark structure
 - **Keyboard navigation** — all interactive elements are reachable and operable via keyboard, with a visible `:focus-visible` outline
 - **Screen reader announcements** — a persistent `role="status"` region announces result counts, empty results and errors after every search, filter or page change; loading skeletons are hidden from screen readers and the list is marked `aria-busy`
+- **Reduced motion** — respects the `prefers-reduced-motion` setting: no skeleton shimmer, transitions, card zoom or smooth scrolling
 - **Form validation** — invalid years show an inline error linked with `aria-describedby` and `aria-invalid`
 - **Search form** — marked with `role="search"` so screen readers identify it as a search landmark
 - **Modal** — uses native `<dialog>` element with `aria-modal`, `aria-label`, and `aria-describedby`; `Escape` key closes the modal
