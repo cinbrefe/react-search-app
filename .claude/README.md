@@ -1,91 +1,65 @@
 # Custom Agents
 
-Custom [Claude Code subagents](https://docs.claude.com/en/docs/claude-code/sub-agents) for this project live in [`.claude/agents/`](agents/). Each `.md` file defines a specialist agent with a focused role, a specific set of tools, and tailored instructions.
+[Claude Code subagents](https://docs.claude.com/en/docs/claude-code/sub-agents) for this project live in [`agents/`](agents/). Each one is a specialist with its own instructions and tools.
+
+Claude Code hands a task to the right agent automatically when it matches the agent's description. To call one yourself, @-mention it or ask for it by name:
+
+```
+@agent-frontend-mentor teach me to test Pagination
+```
+
+```
+Use the accessibility-expert agent to fix ISSUE-03
+```
+
+Run `/agents` to see or edit them. New or changed agents load when Claude Code starts, so restart it after editing these files.
+
+None of the agents commit. You review every commit.
 
 ---
 
-## `a11y-playwright` — Accessibility Testing Agent
+## `accessibility-expert`
 
-A specialist agent for writing and running [Playwright](https://playwright.dev/) accessibility tests targeting **WCAG 2.1 AA** compliance. It uses [`@axe-core/playwright`](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright) for automated scanning and adds targeted manual checks for issues axe can't detect.
-
-### How to invoke
-
-Claude Code delegates to it automatically when a task matches its description. To invoke it explicitly, @-mention it or ask for it by name:
-
-```
-@agent-a11y-playwright <your task>
-```
-
-```
-Use the a11y-playwright agent to <your task>
-```
-
-Run `/agents` to view or edit it.
-
-### Example prompts
+Audits and fixes WCAG 2.1 AA issues, and keeps [`WCAG2-REPORT.md`](../WCAG2-REPORT.md) up to date. It can edit application code.
 
 | Task | Prompt |
 |---|---|
-| Write a test for a specific open issue | `@agent-a11y-playwright Write a test for the skip link focus styling (ISSUE-05)` |
-| Run an axe scan on a component | `@agent-a11y-playwright Run axe-core scan on the FilterSidebar` |
-| Test keyboard navigation | `@agent-a11y-playwright Write keyboard navigation tests for the Modal` |
-| Run all accessibility tests | `@agent-a11y-playwright Run all a11y tests and update WCAG2-REPORT.md with results` |
-| Verify a fix you just made | `@agent-a11y-playwright Check if ISSUE-01 is fixed after the RatingFilter change` |
+| Fix a known issue | `@agent-accessibility-expert Fix ISSUE-01 in RatingFilter` |
+| Audit a component | `@agent-accessibility-expert Audit the Modal for keyboard and screen reader issues` |
+| Check a fix you made | `@agent-accessibility-expert Check whether ISSUE-05 is fixed` |
+| Find new issues | `@agent-accessibility-expert Audit the whole app and add new issues to the report` |
 
-### What it does
+It runs `npm run lint` and `npm run build` after each change. Once tests are set up, it also writes a test for each fix. It finishes with a list of manual checks (keyboard, VoiceOver, zoom).
 
-1. **Checks dependencies** — auto-installs `@playwright/test` and `@axe-core/playwright` if missing
-2. **Reads the codebase** — inspects the relevant component source and `WCAG2-REPORT.md` before writing any test
-3. **Writes tests** — creates or updates files in `tests/`, one `test.describe` per component or issue
-4. **Runs tests** — executes `npx playwright test` against Chromium
-5. **Maps results** — ties failures to specific WCAG 2.1 success criteria
-6. **Updates the report** — marks issues in `WCAG2-REPORT.md` as verified-failing or verified-passing
+## `frontend-mentor`
 
-### What it will NOT do
+Teaches rather than does. It explains how the code works, reviews your code, and guides you through testing with Vitest and React Testing Library. It writes code only when you ask it to.
 
-- Modify application source files (`src/`) — test files only
-- Start the dev server — you must run `npm run dev` yourself before testing locally
-- Fix functional (non-accessibility) bugs
+| Task | Prompt |
+|---|---|
+| Understand a pattern | `@agent-frontend-mentor Why does CardGrid use a key prop?` |
+| Start learning to test | `@agent-frontend-mentor Help me set up Vitest and write my first test` |
+| Next lesson | `@agent-frontend-mentor What should I test next?` |
+| Code review | `@agent-frontend-mentor Review my changes to useFetch` |
+| Interview prep | `@agent-frontend-mentor Quiz me on the decisions in this project` |
 
-### Prerequisites
+Its testing lessons, in order:
+1. `buildDiscoverParams`
+2. `Pagination`
+3. form controls
+4. `useFetch` with mocked API calls (MSW)
+5. a full search-and-modal flow
+6. a regression test for the sort bug
+7. accessibility checks in tests
 
-Before running tests the agent will verify these are installed; if not, it installs them automatically:
+## `performance-seo-auditor`
 
-```bash
-npm install --save-dev @playwright/test @axe-core/playwright
-npx playwright install chromium
-```
+Audits performance (Core Web Vitals, bundle size, fonts, images, caching) and SEO (meta tags, Open Graph, robots.txt, how crawlers see the app). It only reports; it doesn't edit files.
 
-The dev server must be running on `http://localhost:5173` for local test runs:
+| Task | Prompt |
+|---|---|
+| Full audit | `@agent-performance-seo-auditor Audit performance and SEO` |
+| One area | `@agent-performance-seo-auditor How can I make the fonts load faster?` |
+| Before sharing the site | `@agent-performance-seo-auditor Check how the site looks when shared on LinkedIn` |
 
-```bash
-npm run dev
-```
-
-### Running tests manually
-
-```bash
-# Run all tests
-npx playwright test
-
-# Run a specific file
-npx playwright test tests/a11y.spec.js --reporter=list
-
-# Open the HTML report after a run
-npx playwright show-report
-```
-
-### Open issues tracked
-
-The agent is pre-loaded with the issues from [`WCAG2-REPORT.md`](../WCAG2-REPORT.md):
-
-| ID | Component | Issue |
-|---|---|---|
-| ISSUE-01 | `RatingFilter` | Checkboxes used for single-select (should be radio buttons) |
-| ISSUE-02 | `CardDetails` | `<dt>` labels hidden on mobile with `display:none` |
-| ISSUE-03/04 | Inputs, Dropdowns, Buttons | Missing `:focus-visible` styles |
-| ISSUE-05 | Skip link | No visible focus styling |
-| ISSUE-06 | `CardDetails` | "Overview" is a `<p>` not a heading |
-| ISSUE-07 | `CardGrid` | No `aria-live` announcement on result updates |
-| ISSUE-08/09 | Skeletons | Missing `aria-busy` / `aria-hidden` |
-| ISSUE-11 | `YearRangeFilter` | No inline validation error messages |
+It builds the app to measure asset sizes, checks the live site's headers, and runs Lighthouse if Chrome is available. Findings come back ranked by impact and effort, with the top 3 fixes spelled out.

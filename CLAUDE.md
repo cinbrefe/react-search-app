@@ -13,7 +13,7 @@ npm run lint     # ESLint (react, react-hooks, jsx-a11y)
 npm run preview  # Serve the production build
 ```
 
-There is no test runner installed. Playwright was removed on purpose; `tests/wcag-issues.spec.js` and the `a11y-playwright` agent are kept for when it comes back (`npm i -D @playwright/test @axe-core/playwright`, then restore `playwright.config.js` from git history). `.npmrc` sets `legacy-peer-deps=true`.
+There is no test runner installed. Playwright was removed on purpose; `tests/wcag-issues.spec.js` is kept for when it comes back (`npm i -D @playwright/test @axe-core/playwright`, then restore `playwright.config.js` from git history). `.npmrc` sets `legacy-peer-deps=true`.
 
 ## TMDB API key and the proxy
 
@@ -44,3 +44,7 @@ If dev shows **401s from `/api/tmdb`**, `.env.local` probably has `TMDB_API_KEY=
   - Component styles start with `@use '@/styles/abstracts/variables' as *;` and `mixins`. Use the tokens (`$spacing-*`, `$color-*`, `$font-size-*`) and mixins (`respond-to(md)`, `mobile-only`, `flex(...)`, `icon(size)`, `shimmer`, `truncate`). `STYLES.md` lists every one.
   - Size Lucide icons with the `icon()` mixin on a wrapper class, not the `size` prop.
 - **Accessibility** is a project goal. Use semantic elements and labelled controls, put `role="status"` on dynamic messages, and use `.visually-hidden` for text only screen readers need. `WCAG2-REPORT.md` tracks open WCAG 2.1 AA issues; update it when you fix one.
+
+## Agents
+
+Three project subagents live in `.claude/agents/` (see `.claude/README.md`): `accessibility-expert` (fixes WCAG issues, edits code), `frontend-mentor` (teaches and reviews; guides the user through Vitest + React Testing Library rather than doing the work), and `performance-seo-auditor` (report-only). None of them commit.

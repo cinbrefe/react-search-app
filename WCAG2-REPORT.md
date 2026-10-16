@@ -1,6 +1,6 @@
 # WCAG 2.1 AA Report
 
-Accessibility audit of the movie search app against WCAG 2.1 Level AA. This file is the source of known issues for the `a11y-playwright` agent ([.claude/agents/a11y-playwright.md](.claude/agents/a11y-playwright.md)), which updates the **Status** column as tests are written and run.
+Accessibility audit of the movie search app against WCAG 2.1 Level AA. The `accessibility-expert` agent ([.claude/agents/accessibility-expert.md](.claude/agents/accessibility-expert.md)) uses it as its list of known issues and updates the **Status** column as issues are fixed.
 
 **Status values**
 
