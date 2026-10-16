@@ -73,7 +73,7 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 			{/* TMDB search and discover are separate endpoints — filters only work with discover, not search */}
 			{disabled && (
 				<p className='filter-sidebar__disabled-message'>
-					Filters are not available while searching.{' '}
+					Filters and sorting are not available while searching.{' '}
 					<button className='filter-sidebar__clear-search' onClick={onClearSearch} type='button'>Clear search</button>
 				</p>
 			)}
