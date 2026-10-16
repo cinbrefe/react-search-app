@@ -1,0 +1,22 @@
+@use '@/styles/abstracts/variables' as *;
+
+.site-footer {
+	border-top: 1px solid $color-border;
+	padding: $spacing-lg 0;
+
+	&__text {
+		color: $color-text-muted;
+		font-size: $font-size-xs;
+		text-align: center;
+	}
+
+	&__link {
+		color: $color-text-muted;
+		text-decoration: underline;
+
+		&:hover,
+		&:focus {
+			color: $color-accent;
+		}
+	}
+}

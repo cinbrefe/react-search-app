@@ -5,6 +5,7 @@ import { useAppState } from '@/hooks/useAppState'
 import CardDetails from '@/components/features/CardDetails/CardDetails'
 import CardGrid from '@/components/features/CardGrid/CardGrid'
 import FilterSidebar from '@/components/layout/FilterSidebar/FilterSidebar'
+import Footer from '@/components/layout/Footer/Footer'
 import Header from '@/components/layout/Header/Header'
 import ErrorBoundary from '@/components/ui/ErrorBoundary/ErrorBoundary'
 import Modal from '@/components/ui/Modal/Modal'
@@ -34,6 +35,7 @@ function App() {
 						</div>
 					</div>
 				</main>
+				<Footer />
 			</ErrorBoundary>
 		</div>
 	)
