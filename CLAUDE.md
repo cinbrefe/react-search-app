@@ -24,6 +24,8 @@ The browser never sees the TMDB key. All requests go to `/api/tmdb/*` (`API_BASE
 
 Keep these two in sync when changing how requests are proxied. The key must never get a `VITE_` prefix, because Vite inlines those into the bundle.
 
+**Security headers** (CSP, `X-Content-Type-Options`, `Referrer-Policy`) are set in `vercel.json` as the first `routes` entry with `"continue": true`. Vercel rejects a top-level `headers` key alongside `routes`. The CSP only allows the site itself, images from `https://image.tmdb.org` and `data:` images (the dropdown arrow, small assets Vite inlines). Any new external resource (fonts, analytics, embeds, another image host) must be added to the CSP or it silently fails in production. `npm run dev` doesn't apply these headers, so test CSP changes on a Vercel preview from a branch.
+
 If dev shows **401s from `/api/tmdb`**, `.env.local` probably has `TMDB_API_KEY=""`. `vercel env pull` writes Sensitive vars as empty strings, and `.env.local` overrides `.env`. Delete that line and restart the dev server.
 
 ## Architecture
