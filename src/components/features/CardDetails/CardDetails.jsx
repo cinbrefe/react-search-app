@@ -3,7 +3,7 @@
 
 import useFetch from '@/hooks/useFetch'
 
-import { API_BASE_URL, IMAGE_BASE_URL } from '@/constants/api'
+import { API_BASE_URL, DETAIL_IMAGE_BASE_URL } from '@/constants/api'
 import CardDetailSkeleton from '@/components/features/CardDetails/CardDetailSkeleton'
 import '@/components/features/CardDetails/CardDetails.scss'
 
@@ -20,8 +20,10 @@ export default function CardDetails({ id }) {
 		<div className='card-details'>
 			<img
 				className='card-details__poster'
-				src={`${IMAGE_BASE_URL}${poster_path}`}
+				src={`${DETAIL_IMAGE_BASE_URL}${poster_path}`}
 				alt={title}
+				width='500'
+				height='750'
 			/>
 			<div className='card-details__content'>
 				<h2 className='card-details__title h1'>{title}</h2>

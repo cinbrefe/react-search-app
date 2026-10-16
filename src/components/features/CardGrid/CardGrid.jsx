@@ -53,12 +53,13 @@ export default function CardGrid({ query, filters, onSelect }) {
 	return (
 		<div className='card-grid'>
 			<ul className='card-grid__list' aria-label={query ? `Search results for "${query}"` : 'Popular movies'}>
-				{movies.map(movie => (
+				{movies.map((movie, index) => (
 					<li key={movie.id}>
 						<Card
 							title={movie.title}
 							poster_path={movie.poster_path}
 							onSelect={() => onSelect(movie.id)}
+							priority={index < 4} // first row on desktop, first two rows on mobile
 						/>
 					</li>
 				))}

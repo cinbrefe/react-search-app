@@ -11,6 +11,7 @@
 	&__image {
 		aspect-ratio: 2 / 3;
 		border-radius: $border-radius-md;
+		height: auto;
 		object-fit: cover;
 		transition: opacity 0.3s ease, transform 0.3s ease;
 		width: 100%;
