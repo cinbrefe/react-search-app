@@ -15,6 +15,7 @@ Design tokens and conventions for this project. All variables are defined in `sr
 | `$color-text-muted` | `#888888` | Secondary text, placeholders, icons |
 | `$color-disabled` | alias of `$color-text-muted` | Disabled states |
 | `$color-accent` | `#00b3e5` | Interactive elements, active states, focus |
+| `$color-error` | `#ff6b6b` | Form validation messages |
 | `$color-white` | `#ffffff` | Pure white when needed |
 | `$color-black` | `#000000` | Pure black when needed |
 
@@ -151,6 +152,16 @@ Truncates overflowing text with an ellipsis.
 @include truncate;
 ```
 
+---
+
+### `visually-hidden`
+Hides content on screen while keeping it available to screen readers. The `.visually-hidden` utility class uses it; use the mixin directly when content should only be hidden at some breakpoints.
+
+```scss
+@include mobile-only {
+  @include visually-hidden;
+}
+```
 ---
 
 ## BEM Conventions

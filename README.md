@@ -96,15 +96,16 @@ This project follows WAI-ARIA best practices to ensure an inclusive experience f
 
 - **Skip link** — allows keyboard users to bypass the header and jump directly to main content
 - **Semantic HTML** — uses native elements (`<header>`, `<main>`, `<aside>`, `<nav>`, `<dialog>`, `<fieldset>`, `<legend>`) for correct landmark structure
-- **Keyboard navigation** — all interactive elements are reachable and operable via keyboard
-- **Screen reader announcements** — error and empty states use `aria-live="polite"` via `role="status"` to announce dynamic changes
+- **Keyboard navigation** — all interactive elements are reachable and operable via keyboard, with a visible `:focus-visible` outline
+- **Screen reader announcements** — a persistent `role="status"` region announces result counts, empty results and errors after every search, filter or page change; loading skeletons are hidden from screen readers and the list is marked `aria-busy`
+- **Form validation** — invalid years show an inline error linked with `aria-describedby` and `aria-invalid`
 - **Search form** — marked with `role="search"` so screen readers identify it as a search landmark
 - **Modal** — uses native `<dialog>` element with `aria-modal`, `aria-label`, and `aria-describedby`; `Escape` key closes the modal
 - **Accordion** — implements `aria-expanded` and `aria-controls` following the WAI-ARIA disclosure pattern
 - **Pagination** — wrapped in `<nav aria-label="Pagination">`; each button has a descriptive `aria-label` and `aria-current="page"` for the active page
 - **Card list** — uses a contextual `aria-label` that reflects search or browse state
 - **Form controls** — all inputs, selects, and checkboxes have associated `<label>` elements via `htmlFor`/`id`
-- **Filter groups** — grouped with `role="group"` and `aria-label` for context
+- **Filter groups** — grouped with `role="group"` and `aria-label`; the single-choice rating filter is a `role="radiogroup"` of radio buttons
 - **Buttons** — all icon-only buttons have `aria-label` for screen reader context
 - **Images** — decorative poster images use `alt=""` and `aria-hidden="true"` to avoid redundant announcements
 - **Visually hidden content** — uses a `.visually-hidden` utility class for labels meaningful to screen readers but not needed visually
