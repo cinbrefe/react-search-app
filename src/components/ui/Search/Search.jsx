@@ -20,7 +20,7 @@ export default function Search({ onSearch }) {
 	return (
 		<form className='search-form' onSubmit={handleSubmit} role="search">
 			<div className='search-form__group'>
-				<label htmlFor='search-input' className='visually-hidden'>Search movies</label>  
+				<label htmlFor='search-input' className='visually-hidden'>Search movies</label>
 				<Input
 					id='search-input'
 					placeholder='Search for movies...'

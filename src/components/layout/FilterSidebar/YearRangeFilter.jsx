@@ -39,9 +39,9 @@ export default function YearRangeFilter({ value, onChange }) {
 		<div className='filter-sidebar__group filter-sidebar__group--year'>
 			<label className='filter-sidebar__label' htmlFor='year-from'>
 				From
-				<input 
-					className='filter-sidebar__input' 
-					id='year-from' 
+				<input
+					className='filter-sidebar__input'
+					id='year-from'
 					placeholder='e.g. 2000'
 					min='1900'
 					max={new Date().getFullYear()}
