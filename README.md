@@ -24,7 +24,7 @@ Users can browse popular movies, search by title, filter by genre, rating, and y
 | [Sass](https://sass-lang.com/) | 1 | CSS preprocessor |
 | [Vite](https://vitejs.dev/) | 8 | Build tool and dev server |
 | [ESLint](https://eslint.org/) | 10 | Linting |
-| [Lucide React](https://lucide.dev/) | latest | Icon library |
+| [Lucide React](https://lucide.dev/) | 1 | Icon library |
 | [DM Sans](https://fonts.google.com/specimen/DM+Sans) | — | Self-hosted font |
 | [TMDB API](https://developer.themoviedb.org/docs) | v3 | Movie data |
 
@@ -60,7 +60,7 @@ src/
 
 ## Installation
 
-**Prerequisites:** Node.js 18+
+**Prerequisites:** Node.js 22.12 or newer (Vite 8 needs it; Vercel deploys with Node 24). Check yours with `node -v`.
 
 1. Clone the repo
    ```bash
@@ -108,6 +108,20 @@ This project follows WAI-ARIA best practices to ensure an inclusive experience f
 - **Buttons** — all icon-only buttons have `aria-label` for screen reader context
 - **Images** — decorative poster images use `alt=""` and `aria-hidden="true"` to avoid redundant announcements
 - **Visually hidden content** — uses a `.visually-hidden` utility class for labels meaningful to screen readers but not needed visually
+
+## Testing
+
+Automated tests aren't set up yet. The planned stack is:
+
+| Tool | Purpose |
+|---|---|
+| [Vitest](https://vitest.dev/) | Test runner, using the same config as Vite (including the `@/` alias) |
+| [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) | Renders components and finds elements the way a user would (by role, label, text) |
+| [user-event](https://testing-library.com/docs/user-event/intro/) | Simulates clicks and typing |
+| [jest-dom](https://github.com/testing-library/jest-dom) | Readable assertions such as `toBeDisabled()` and `toHaveAccessibleName()` |
+| [MSW](https://mswjs.io/) | Mocks the TMDB API so tests don't hit the network |
+
+Until then, check changes with `npm run lint` and `npm run build`. Accessibility issues and their status are tracked in [WCAG2-REPORT.md](WCAG2-REPORT.md). `tests/wcag-issues.spec.js` holds Playwright accessibility tests from an earlier setup; Playwright isn't currently installed, so they don't run.
 
 ## Linting
 
