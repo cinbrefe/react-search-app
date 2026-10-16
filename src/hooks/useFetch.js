@@ -22,7 +22,7 @@ const useFetch = (url) => {
 	const [state, dispatch] = useReducer(reducer, initialState)
 
 	useEffect(() => {
-		if (!url) return // allows callers to conditionally skip fetching by passing null
+		if (!url) return
 		const controller = new AbortController() // cancels the request if url changes or component unmounts
 		dispatch({ type: 'FETCH_START' })
 		fetch(url, { signal: controller.signal })

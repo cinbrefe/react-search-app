@@ -30,7 +30,7 @@ function App() {
 						<div className='site-main__content'>
 							<SortBar value={filters.sortBy} onChange={handleSortChange} />
 							{/* key forces remount on query/filter change, which resets currentPage to 1 */}
-						<CardGrid key={`${query}-${JSON.stringify(filters)}`} query={query} filters={filters} onSelect={setSelectedId} />
+							<CardGrid key={`${query}-${JSON.stringify(filters)}`} query={query} filters={filters} onSelect={setSelectedId} />
 						</div>
 					</div>
 				</main>

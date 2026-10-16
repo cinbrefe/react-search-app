@@ -1,5 +1,3 @@
-// API constants
-
 // Requests go through our own serverless proxy (/api/tmdb/*) so the TMDB API
 // key stays server-side and is never exposed to the browser.
 export const API_BASE_URL = '/api/tmdb'

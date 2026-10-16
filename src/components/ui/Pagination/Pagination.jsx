@@ -8,12 +8,11 @@ import '@/components/ui/Pagination/Pagination.scss'
 
 export default function Pagination({ currentPage, totalPages, onPageChange }) {
 
-	// Navigation flags to control button disabled states
 	const canGoPrev = currentPage > 1
 	const canGoNext = currentPage < totalPages
 	const canJumpForward = currentPage + 5 <= totalPages
 
-	// Builds a list of up to 5 page numbers centered around the current page
+	// Up to 5 page numbers: 1–5 on the first pages, then the 4 before the current page plus the current one
 	function buildPageList() {
 		const start = Math.max(1, currentPage - 4)
 		const end = Math.min(start + 4, totalPages)
@@ -26,7 +25,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 
 	function handlePrev() { onPageChange(currentPage - 1) }
 	function handleNext() { onPageChange(currentPage + 1) }
-	// Jumps forward 5 pages at a time
 	function handleJumpForward() { onPageChange(currentPage + 5) }
 
 	return (
@@ -55,7 +53,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 				</button>
 			))}
 
-			{/* Jump forward 5 pages, hidden when near the end */}
 			<button
 				className='pagination__btn pagination__btn--jump'
 				type='button'
