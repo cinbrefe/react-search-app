@@ -1,20 +1,29 @@
 // Props:
 //	onSearch (function)
+//	query (string, optional)
 
-import { useRef } from 'react'
+import { useState } from 'react'
 import { Search as SearchIcon } from 'lucide-react'
 
 import Input from '@/components/ui/Form/Input/Input'
 import '@/components/ui/Search/Search.scss'
 
-export default function Search({ onSearch }) {
-	const inputRef = useRef()
+export default function Search({ onSearch, query = '' }) {
+	const [text, setText] = useState(query)
+	const [prevQuery, setPrevQuery] = useState(query)
+
+	if (query !== prevQuery) {
+		setPrevQuery(query)
+		setText(query)
+	}
+
+	function handleInputChange(e) {
+		setText(e.target.value)
+	}
 
 	function handleSubmit(e) {
 		e.preventDefault()
-		const query = inputRef.current.value.trim()
-		onSearch(query)
-		inputRef.current.value = ''
+		onSearch(text.trim())
 	}
 
 	return (
@@ -24,8 +33,9 @@ export default function Search({ onSearch }) {
 				<Input
 					id='search-input'
 					placeholder='Search for movies...'
-					ref={inputRef}
 					type='text'
+					value={text}
+					onChange={handleInputChange}
 				/>
 				<button className='search-form__button' type='submit' aria-label='Search'><SearchIcon className='search-form__icon' /></button>
 			</div>

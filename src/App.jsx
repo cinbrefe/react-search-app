@@ -23,7 +23,7 @@ function App() {
 					</Modal>
 				)}
 				<a href='#site-main' className='skip-link'>Skip to main content</a>
-				<Header onSearch={setQuery} />
+				<Header onSearch={setQuery} query={query} />
 				<main id='site-main' className='site-main'>
 					<div className='container site-main__container'>
 						<FilterSidebar onFilter={handleFiltersChange} disabled={!!query} onClearSearch={handleClearSearch} />
