@@ -32,7 +32,7 @@ If dev shows **401s from `/api/tmdb`**, `.env.local` probably has `TMDB_API_KEY=
 - **Fetching:** every request goes through `useFetch(url)`, which uses a reducer for `{ data, loading, error }` and cancels in-flight requests with `AbortController`. Pass `null` to skip the fetch.
 - **Two TMDB endpoints:** `CardGrid` calls `/search/movie` when there is a text query and `/discover/movie` (`buildDiscoverParams`) otherwise. TMDB can't combine a text search with filters, so the filter `<fieldset>` and the sort dropdown are disabled while a query is active. Rating sort and rating filter add `vote_count.gte` to keep obscure titles out. Pagination stops at page 500 (TMDB's limit).
 - **Resetting pagination:** `App.jsx` sets `key={query + JSON.stringify(filters)}` on `CardGrid`. Every new query or filter remounts it, which resets `currentPage` to 1. Keep this in mind before adding state to `CardGrid`.
-- **Modal:** uses the native `<dialog>` with `showModal()`, rendered through `createPortal` into `#modal` in `index.html`. It closes with the close button, Escape (`onCancel`) or a click on the backdrop.
+- **Modal:** uses the native `<dialog>` with `showModal()`, rendered through `createPortal` into `#modal` in `index.html`. It closes with the close button, Escape or a click on the backdrop; all three close the dialog natively, and its `close` event (`onClose`) is the only thing that updates React state. Don't rely on `cancel`: browsers skip it on some Escape presses.
 - **Accordion:** can be controlled or uncontrolled. `FilterSidebar` lets each accordion manage itself on desktop (all open) and controls them on mobile (one open at a time), using an `isMobile` value tied to window resize.
 - **Components:** `components/features/` holds domain components (Card, CardDetails, CardGrid), `layout/` holds page sections, `ui/` holds reusable primitives. Each component folder contains its `.jsx` and its own `.scss`, and the component imports its stylesheet.
 
@@ -43,6 +43,7 @@ If dev shows **401s from `/api/tmdb`**, `.env.local` probably has `TMDB_API_KEY=
 - **SCSS:** mobile-first BEM, with one root block per component (`.card`, `.card__image`, `.pagination__btn--active`). Don't nest elements (`.block__a__b`); write `.block__b`. Skeletons get their own blocks (`.card-skeleton`). Properties are sorted alphabetically.
   - Component styles start with `@use '@/styles/abstracts/variables' as *;` and `mixins`. Use the tokens (`$spacing-*`, `$color-*`, `$font-size-*`) and mixins (`respond-to(md)`, `mobile-only`, `flex(...)`, `icon(size)`, `shimmer`, `truncate`). `STYLES.md` lists every one.
   - Size Lucide icons with the `icon()` mixin on a wrapper class, not the `size` prop.
+- **TMDB attribution is required by TMDB's terms:** keep the TMDB logo in `Header` and the disclaimer in `Footer` ("This product uses the TMDB API but is not endorsed or certified by TMDB."). Don't remove or reword them.
 - **Accessibility** is a project goal. Use semantic elements and labelled controls, put `role="status"` on dynamic messages, and use `.visually-hidden` for text only screen readers need. `WCAG2-REPORT.md` tracks open WCAG 2.1 AA issues; update it when you fix one.
 
 ## Agents
