@@ -1,5 +1,7 @@
 # Discover Movies
 
+**Live demo:** [search.cindybrenes.dev](https://search.cindybrenes.dev/)
+
 A responsive movie search and discovery app built with React 19 and the TMDB API. This project was built to demonstrate proficiency in modern React patterns, component architecture, mobile-first SCSS, and web accessibility.
 
 Users can browse popular movies, search by title, filter by genre, rating, and year range, sort results, and view full movie details in a modal — all with skeleton loading states and accessible markup throughout.
@@ -31,6 +33,8 @@ Users can browse popular movies, search by title, filter by genre, rating, and y
 ## Project Structure
 
 ```
+api/
+└── [...path].js              # Vercel serverless proxy that adds the TMDB key server-side
 src/
 ├── assets/                   # Static assets (SVGs, images)
 ├── components/
@@ -40,11 +44,12 @@ src/
 │   │   └── CardGrid/         # Grid layout for cards
 │   ├── layout/               # Page-level layout components
 │   │   ├── FilterSidebar/    # Filter sidebar with genre, rating, year filters
-│   │   └── Header/           # Site header with search and sort
+│   │   ├── Footer/           # TMDB attribution
+│   │   └── Header/           # Site header with logo and search
 │   └── ui/                   # Reusable UI primitives
 │       ├── Accordion/
 │       ├── ErrorBoundary/
-│       ├── Form/             # Checkbox, Dropdown, Input
+│       ├── Form/             # Checkbox, Dropdown, Input, Radio
 │       ├── Modal/
 │       ├── Pagination/
 │       ├── Search/
@@ -90,6 +95,13 @@ src/
 | `npm run preview` | Preview the production build locally |
 | `npm run lint` | Run ESLint across the project |
 
+## Deployment
+
+The app is deployed on [Vercel](https://vercel.com/). Pushing to `main` deploys to production; other branches get preview deployments.
+
+- Set `TMDB_API_KEY` in the Vercel project's Environment Variables. The serverless function in `api/` reads it, so the key never reaches the browser.
+- `vercel.json` handles routing (`/api/*` goes to the proxy function, everything else to the app) and sets security headers, including a Content Security Policy. If you add an external resource such as fonts, analytics or another image host, add its domain to the CSP.
+
 ## Accessibility
 
 This project follows WAI-ARIA best practices to ensure an inclusive experience for all users.
@@ -105,7 +117,7 @@ This project follows WAI-ARIA best practices to ensure an inclusive experience f
 - **Accordion** — implements `aria-expanded` and `aria-controls` following the WAI-ARIA disclosure pattern
 - **Pagination** — wrapped in `<nav aria-label="Pagination">`; each button has a descriptive `aria-label` and `aria-current="page"` for the active page
 - **Card list** — uses a contextual `aria-label` that reflects search or browse state
-- **Form controls** — all inputs, selects, and checkboxes have associated `<label>` elements via `htmlFor`/`id`
+- **Form controls** — all inputs, selects, checkboxes, and radio buttons have associated `<label>` elements via `htmlFor`/`id`
 - **Filter groups** — grouped with `role="group"` and `aria-label`; the single-choice rating filter is a `role="radiogroup"` of radio buttons
 - **Buttons** — all icon-only buttons have `aria-label` for screen reader context
 - **Images** — decorative poster images use `alt=""` and `aria-hidden="true"` to avoid redundant announcements
@@ -128,3 +140,7 @@ Until then, check changes with `npm run lint` and `npm run build`. Accessibility
 ## Linting
 
 ESLint is configured with `eslint-plugin-react`, `eslint-plugin-react-hooks`, and `eslint-plugin-jsx-a11y` for React best practices and accessibility checks.
+
+## Credits
+
+Movie data and images are provided by [TMDB](https://www.themoviedb.org/). This product uses the TMDB API but is not endorsed or certified by TMDB.
