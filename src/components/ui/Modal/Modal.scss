@@ -9,11 +9,10 @@
 	margin: auto;
 	max-height: 100dvh;
 	overflow-y: auto;
-	position: relative;
 	width: 100%;
 
 	@include respond-to(md) {
-		max-height: none;
+		max-height: calc(100dvh - #{$spacing-xl * 2});
 		max-width: 900px;
 	}
 
