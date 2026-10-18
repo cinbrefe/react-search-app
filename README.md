@@ -152,3 +152,5 @@ ESLint is configured with `eslint-plugin-react`, `eslint-plugin-react-hooks`, an
 ## Credits
 
 Movie data and images are provided by [TMDB](https://www.themoviedb.org/). This product uses the TMDB API but is not endorsed or certified by TMDB.
+
+Thanks to [Jonathan Brenes](https://github.com/jonbrefe) for his help moving the TMDB API key behind a serverless proxy, so it never reaches the browser.
