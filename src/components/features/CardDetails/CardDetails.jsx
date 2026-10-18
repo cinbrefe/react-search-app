@@ -10,9 +10,9 @@ import '@/components/features/CardDetails/CardDetails.scss'
 export default function CardDetails({ id }) {
 	const { data, loading, error } = useFetch(id ? `${API_BASE_URL}/movie/${id}` : null)
 
-	if (loading) return <CardDetailSkeleton />
-	if (error) return <p>Error: {error.message}</p>
-	if (!data) return <p>No results found.</p>
+	if (error) return <p className='error-message' role='alert'>Sorry, we couldn't load this movie. Please close this window and try again.</p>
+	// No data yet also covers the first render, before the request has started
+	if (loading || !data) return <CardDetailSkeleton />
 
 	const { poster_path, title, overview, release_date, genres, vote_average, runtime } = data
 
