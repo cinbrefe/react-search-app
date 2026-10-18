@@ -94,6 +94,7 @@ src/
 | `npm run build` | Build for production |
 | `npm run preview` | Preview the production build locally |
 | `npm run lint` | Run ESLint across the project |
+| `npm test` | Run the tests in watch mode |
 
 ## Deployment
 
@@ -125,17 +126,24 @@ This project follows WAI-ARIA best practices to ensure an inclusive experience f
 
 ## Testing
 
-Automated tests aren't set up yet. The planned stack is:
+Tests use [Vitest](https://vitest.dev/) with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). Test files sit next to the code they test and end in `.test.js` or `.test.jsx`.
+
+```bash
+npm test                                   # watch mode: reruns affected tests on every save
+npx vitest run                             # run all tests once (what CI uses)
+npx vitest run src/components/features/CardGrid/buildDiscoverParams.test.js   # one file
+```
 
 | Tool | Purpose |
 |---|---|
 | [Vitest](https://vitest.dev/) | Test runner, using the same config as Vite (including the `@/` alias) |
+| [jsdom](https://github.com/jsdom/jsdom) | Simulated browser page for tests running in Node |
 | [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) | Renders components and finds elements the way a user would (by role, label, text) |
 | [user-event](https://testing-library.com/docs/user-event/intro/) | Simulates clicks and typing |
 | [jest-dom](https://github.com/testing-library/jest-dom) | Readable assertions such as `toBeDisabled()` and `toHaveAccessibleName()` |
 | [MSW](https://mswjs.io/) | Mocks the TMDB API so tests don't hit the network |
 
-Until then, check changes with `npm run lint` and `npm run build`. Accessibility issues and their status are tracked in [WCAG2-REPORT.md](WCAG2-REPORT.md).
+Setup lives in the `test` section of `vite.config.js` and in `src/test/setup.js`. Accessibility issues and their status are tracked in [WCAG2-REPORT.md](WCAG2-REPORT.md).
 
 ## Linting
 

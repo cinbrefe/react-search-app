@@ -11,9 +11,12 @@ npm run dev      # Vite dev server on http://localhost:5173
 npm run build    # Production build to dist/
 npm run lint     # ESLint (react, react-hooks, jsx-a11y)
 npm run preview  # Serve the production build
+npm test         # Vitest in watch mode
+npx vitest run   # all tests once
+npx vitest run path/to/file.test.js   # a single test file
 ```
 
-There is no test runner installed yet; Vitest + React Testing Library (with MSW for API mocks) is planned. Playwright and its tests were removed on purpose (they're in git history). `.npmrc` sets `legacy-peer-deps=true`.
+Tests use Vitest + React Testing Library (jsdom), with MSW available for API mocks. Config is the `test` section of `vite.config.js` (only `src/**/*.test.{js,jsx}` is included) plus `src/test/setup.js` (jest-dom matchers, `cleanup` after each test). Test files sit next to the code they test. `.npmrc` sets `legacy-peer-deps=true`, so npm doesn't install peer dependencies: add them by hand (e.g. `@testing-library/dom`). Pure logic is easier to test in its own `.js` file, like `CardGrid/buildDiscoverParams.js`: exporting non-components from a `.jsx` file trips `react-refresh/only-export-components`.
 
 ## TMDB API key and the proxy
 
