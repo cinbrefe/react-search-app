@@ -135,7 +135,7 @@ Automated tests aren't set up yet. The planned stack is:
 | [jest-dom](https://github.com/testing-library/jest-dom) | Readable assertions such as `toBeDisabled()` and `toHaveAccessibleName()` |
 | [MSW](https://mswjs.io/) | Mocks the TMDB API so tests don't hit the network |
 
-Until then, check changes with `npm run lint` and `npm run build`. Accessibility issues and their status are tracked in [WCAG2-REPORT.md](WCAG2-REPORT.md). `tests/wcag-issues.spec.js` holds Playwright accessibility tests from an earlier setup; Playwright isn't currently installed, so they don't run.
+Until then, check changes with `npm run lint` and `npm run build`. Accessibility issues and their status are tracked in [WCAG2-REPORT.md](WCAG2-REPORT.md).
 
 ## Linting
 

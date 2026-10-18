@@ -13,7 +13,7 @@ npm run lint     # ESLint (react, react-hooks, jsx-a11y)
 npm run preview  # Serve the production build
 ```
 
-There is no test runner installed. Playwright was removed on purpose; `tests/wcag-issues.spec.js` is kept for when it comes back (`npm i -D @playwright/test @axe-core/playwright`, then restore `playwright.config.js` from git history). `.npmrc` sets `legacy-peer-deps=true`.
+There is no test runner installed yet; Vitest + React Testing Library (with MSW for API mocks) is planned. Playwright and its tests were removed on purpose (they're in git history). `.npmrc` sets `legacy-peer-deps=true`.
 
 ## TMDB API key and the proxy
 
