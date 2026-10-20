@@ -53,4 +53,4 @@ If dev shows **401s from `/api/tmdb`**, `.env.local` probably has `TMDB_API_KEY=
 
 ## Agents
 
-Three project subagents live in `.claude/agents/` (see `.claude/README.md`): `accessibility-expert` (fixes WCAG issues, edits code), `frontend-mentor` (teaches and reviews; guides the user through Vitest + React Testing Library rather than doing the work), and `performance-seo-auditor` (report-only). None of them commit.
+Four project subagents live in `.claude/agents/` (see `.claude/README.md`): `accessibility-expert` (fixes WCAG issues, edits code), `frontend-mentor` (teaches and reviews; guides the user through Vitest + React Testing Library rather than doing the work), `performance-seo-auditor` (report-only), and `qa-engineer` (test plans, bug reports, runs the suite and reviews the user's tests without writing them). None of them commit.

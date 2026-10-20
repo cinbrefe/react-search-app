@@ -63,3 +63,17 @@ Audits performance (Core Web Vitals, bundle size, fonts, images, caching) and SE
 | Before sharing the site | `@agent-performance-seo-auditor Check how the site looks when shared on LinkedIn` |
 
 It builds the app to measure asset sizes, checks the live site's headers, and runs Lighthouse if Chrome is available. Findings come back ranked by impact and effort, with the top 3 fixes spelled out.
+
+## `qa-engineer`
+
+Plans tests, hunts for bugs, runs the suite, and reviews the tests you write. It doesn't write tests or change code unless you ask, so you keep practising.
+
+| Task | Prompt |
+|---|---|
+| Review your tests | `@agent-qa-engineer Review my tests in App.test.jsx` |
+| Find gaps | `@agent-qa-engineer What important behaviour is still untested?` |
+| Test plan | `@agent-qa-engineer Write a test plan for the year range filter` |
+| Bug hunt | `@agent-qa-engineer Hunt for bugs in the search and filter interaction` |
+| Manual checklist | `@agent-qa-engineer Give me a manual checklist before I share the site` |
+
+Bug reports come with steps to reproduce, expected and actual results, severity, and the file involved. It also flags what can't be tested in jsdom (layout, the real `<dialog>`, scrolling, security headers) as manual checks or future Playwright tests.
