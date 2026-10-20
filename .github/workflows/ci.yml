@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # Clean install from package-lock.json (respects .npmrc's legacy-peer-deps)
+      - run: npm ci
+
+      - run: npm run lint
+
+      # Vitest runs once (no watch mode) because GitHub sets CI=true
+      - run: npm test
+
+      - run: npm run build
