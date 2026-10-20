@@ -59,8 +59,7 @@ describe('App', () => {
 		const sortSelect = screen.getByRole('combobox', { name: 'Sort by:' })
 		await user.selectOptions(sortSelect, 'vote_average.desc')
 
-		// 2. Open the Genre panel, then tick "Action"
-		await user.click(screen.getByRole('button', { name: 'Genre' }))
+		// 2. Tick "Action" (the filter panels start open on desktop; jsdom's default window is desktop-sized)
 		await user.click(screen.getByRole('checkbox', { name: 'Action' }))
 
 		// 3. The sort must still be "Rating" (check the option's value, not its text)

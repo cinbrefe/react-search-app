@@ -3,14 +3,15 @@
 //	title (string)
 //	isOpen (boolean, optional)
 //	onToggle (function, optional)
+//	defaultOpen (boolean, optional) — starting state when uncontrolled
 
 import { useState, useId } from 'react'
 import { ChevronDown } from 'lucide-react'
 
 import '@/components/ui/Accordion/Accordion.scss'
 
-export default function Accordion({ children, title, isOpen: controlledIsOpen, onToggle }) {
-	const [internalIsOpen, setInternalIsOpen] = useState(false)
+export default function Accordion({ children, title, isOpen: controlledIsOpen, onToggle, defaultOpen = false }) {
+	const [internalIsOpen, setInternalIsOpen] = useState(defaultOpen)
 	const uniqueId = useId()
 	const headerId = `accordion-header-${uniqueId}`
 	const panelId = `accordion-panel-${uniqueId}`

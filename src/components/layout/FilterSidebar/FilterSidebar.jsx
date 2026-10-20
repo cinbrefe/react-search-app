@@ -84,6 +84,7 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 					title='Genre'
 					isOpen={isMobile ? activeAccordion === 'genre' : undefined}
 					onToggle={() => handleAccordionToggle('genre')}
+					defaultOpen
 				>
 					<GenreFilter
 						value={filters.genres}
@@ -94,6 +95,7 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 					title='Rating'
 					isOpen={isMobile ? activeAccordion === 'rating' : undefined}
 					onToggle={() => handleAccordionToggle('rating')}
+					defaultOpen
 				>
 					<RatingFilter
 						value={filters.ratingFilter}
@@ -104,6 +106,7 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 					title='Year Range'
 					isOpen={isMobile ? activeAccordion === 'year' : undefined}
 					onToggle={() => handleAccordionToggle('year')}
+					defaultOpen
 				>
 					<YearRangeFilter
 						value={{ yearFrom: filters.yearFrom, yearTo: filters.yearTo }}
