@@ -15,9 +15,10 @@ export function useAppState() {
 	const [selectedId, setSelectedId] = useState(null)
 	const [statusMessage, setStatusMessage] = useState('')
 
-	// FilterSidebar sends its whole filters object, which never tracks sortBy — keep the current sort
-	function handleFiltersChange(sidebarFilters) {
-		setFilters(prev => ({ ...sidebarFilters, sortBy: prev.sortBy }))
+	// Merges a partial update (e.g. { genres: [28] }) into the latest filters, so a late update
+	// like the debounced year can't overwrite newer ones. FilterSidebar never sends sortBy, so the sort is kept
+	function handleFiltersChange(changes) {
+		setFilters(prev => ({ ...prev, ...changes }))
 	}
 
 	function handleSortChange(value) {

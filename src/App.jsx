@@ -27,7 +27,7 @@ function App() {
 				<Header onSearch={setQuery} query={query} />
 				<main id='site-main' className='site-main'>
 					<div className='container site-main__container'>
-						<FilterSidebar onFilter={handleFiltersChange} disabled={!!query} onClearSearch={handleClearSearch} />
+						<FilterSidebar onFilter={handleFiltersChange} disabled={!!query} onClearSearch={handleClearSearch} filters={filters} />
 						<div className='site-main__content'>
 							<p className='visually-hidden' role='status'>{statusMessage}</p>
 							<SortBar value={filters.sortBy} onChange={handleSortChange} disabled={!!query} />

@@ -1,7 +1,8 @@
 // Props:
-//	onFilter (function)
+//	onFilter (function) — receives only the changed fields, e.g. { genres: [28] }
 //	disabled (boolean)
 //	onClearSearch (function)
+//	filters (object)
 
 import { useState, useEffect } from 'react'
 import { RotateCcw } from 'lucide-react'
@@ -13,9 +14,9 @@ import RatingFilter from './RatingFilter'
 import YearRangeFilter from './YearRangeFilter'
 import '@/components/layout/FilterSidebar/FilterSidebar.scss'
 
-export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
-	const [filters, setFilters] = useState(INITIAL_FILTERS)
+export default function FilterSidebar({ onFilter, disabled, onClearSearch, filters }) {
 	const [activeAccordion, setActiveAccordion] = useState(null)
+	const [resetCount, setResetCount] = useState(0)
 	const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
 	useEffect(() => {
@@ -34,20 +35,18 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 	}
 
 	function handleFilterChange(key, value) {
-		const updated = { ...filters, [key]: value }
-		setFilters(updated)
-		onFilter(updated)
+		onFilter({ [key]: value })
 	}
 
 	function handleYearRangeChange({ yearFrom, yearTo }) {
-		const updated = { ...filters, yearFrom, yearTo }
-		setFilters(updated)
-		onFilter(updated)
+		onFilter({ yearFrom, yearTo })
 	}
 
 	function handleResetFilters() {
-		setFilters(INITIAL_FILTERS)
-		onFilter(INITIAL_FILTERS)
+		// Sort isn't a filter, so it's left as is
+		onFilter({ genres: [], ratingFilter: '', yearFrom: '', yearTo: '' })
+		// Remounts YearRangeFilter: cancels a pending year update and clears a year that was never applied (e.g. an invalid 1800)
+		setResetCount(count => count + 1)
 	}
 
 	const hasActiveFilters =
@@ -109,6 +108,7 @@ export default function FilterSidebar({ onFilter, disabled, onClearSearch }) {
 					defaultOpen
 				>
 					<YearRangeFilter
+						key={resetCount}
 						value={{ yearFrom: filters.yearFrom, yearTo: filters.yearTo }}
 						onChange={handleYearRangeChange}
 					/>
