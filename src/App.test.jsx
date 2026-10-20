@@ -48,4 +48,23 @@ describe('App', () => {
 		await user.click(within(modal).getByRole('button', { name: 'Close' }))
 		expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
 	})
+
+	it('keeps the sort order when a genre filter is added', async () => {
+		const user = userEvent.setup()
+		document.body.innerHTML = '<div id="modal"></div>'
+		render(<App />)
+		await screen.findByRole('button', { name: 'View details for Popular One' })
+
+		// 1. Sort by rating
+		const sortSelect = screen.getByRole('combobox', { name: 'Sort by:' })
+		await user.selectOptions(sortSelect, 'vote_average.desc')
+
+		// 2. Open the Genre panel, then tick "Action"
+		await user.click(screen.getByRole('button', { name: 'Genre' }))
+		await user.click(screen.getByRole('checkbox', { name: 'Action' }))
+
+		// 3. The sort must still be "Rating" (check the option's value, not its text)
+		expect(sortSelect).toHaveValue('vote_average.desc')
+	})
+
 })
