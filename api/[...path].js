@@ -37,7 +37,8 @@ export default async function handler(req, res) {
 		const tmdbRes = await fetch(`${TMDB_BASE_URL}/${tmdbPath}?${params.toString()}`)
 		const body = await tmdbRes.text()
 		res.setHeader('Content-Type', 'application/json')
-		res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400')
+		// Only cache successes: a cached 404/429/5xx would keep failing for everyone for an hour
+		res.setHeader('Cache-Control', tmdbRes.ok ? 's-maxage=3600, stale-while-revalidate=86400' : 'no-store')
 		return res.status(tmdbRes.status).send(body)
 	} catch {
 		return res.status(502).json({ error: 'Upstream request to TMDB failed' })
