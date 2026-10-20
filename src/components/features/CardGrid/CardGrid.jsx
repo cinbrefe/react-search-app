@@ -4,7 +4,7 @@
 //	onSelect (function)
 //	onStatusChange (function) — receives a message for screen readers when results, errors or "no results" appear
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import { API_BASE_URL } from '@/constants/api'
 import useFetch from '@/hooks/useFetch'
@@ -24,6 +24,21 @@ export default function CardGrid({ query, filters, onSelect, onStatusChange }) {
 		: `${API_BASE_URL}/discover/movie?${buildDiscoverParams(filters, currentPage)}`
 
 	const { data, loading, error } = useFetch(url)
+	const resultsHeadingRef = useRef(null)
+	const focusResultsRef = useRef(false)
+
+	// Changing page unmounts Pagination while loading, which would drop keyboard focus to <body>
+	function handlePageChange(page) {
+		focusResultsRef.current = true
+		setCurrentPage(page)
+	}
+
+	useEffect(() => {
+		if (data && focusResultsRef.current) {
+			focusResultsRef.current = false
+			resultsHeadingRef.current?.focus()
+		}
+	}, [data])
 
 	// Announced through App's status region, which (unlike this component) isn't remounted on every search
 	useEffect(() => {
@@ -46,10 +61,12 @@ export default function CardGrid({ query, filters, onSelect, onStatusChange }) {
 	if (!data?.results?.length) return <p className='error-message'>{query ? `No results found for "${query}"` : 'No movies available.'}</p>
 
 	const movies = data.results.filter(movie => movie.poster_path)
+	const resultsLabel = query ? `Search results for "${query}"` : 'Popular movies'
 
 	return (
 		<div className='card-grid'>
-			<ul className='card-grid__list' aria-label={query ? `Search results for "${query}"` : 'Popular movies'}>
+			<h2 className='visually-hidden' ref={resultsHeadingRef} tabIndex={-1}>{resultsLabel}, page {currentPage}</h2>
+			<ul className='card-grid__list' aria-label={resultsLabel}>
 				{movies.map((movie, index) => (
 					<li key={movie.id}>
 						<Card
@@ -64,7 +81,7 @@ export default function CardGrid({ query, filters, onSelect, onStatusChange }) {
 			<Pagination
 				currentPage={currentPage}
 				totalPages={Math.min(data.total_pages || 1, 500)}
-				onPageChange={setCurrentPage}
+				onPageChange={handlePageChange}
 			/>
 		</div>
 	)
