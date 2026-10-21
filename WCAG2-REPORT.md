@@ -26,6 +26,7 @@ Accessibility audit of the movie search app against WCAG 2.1 Level AA. The `acce
 | ISSUE-08 | `CardSkeleton` / `CardGrid` | Loading list missing `aria-busy` | 4.1.3 | Fixed 2026-10-16 | Manually, 2026-10-17 |
 | ISSUE-09 | `CardDetailSkeleton` | Decorative skeleton not hidden | 1.3.1 | Fixed 2026-10-16 | Manually, 2026-10-17 |
 | ISSUE-11 | `YearRangeFilter` | No validation error messages | 3.3.1, 3.3.3 | Fixed 2026-10-16 | Manually, 2026-10-17 |
+| ISSUE-12 | `CardGrid`, `Pagination` | Focus lost when changing page | 2.4.3 | Fixed 2026-10-20 | Vitest: `App.test.jsx` |
 
 ---
 
@@ -151,11 +152,23 @@ The inputs have `min`/`max`, but invalid values (e.g. 1800, or a "From" later th
 
 **Fixed 2026-10-16:** Years outside 1900 to the current year, or a "To" earlier than "From", show an inline error (`$color-error`) linked with `aria-describedby`, set `aria-invalid`, and aren't applied as filters. Years still being typed (under 4 digits) aren't flagged or applied.
 
+### ISSUE-12 — Changing page loses keyboard focus
+
+**Files:** [src/components/features/CardGrid/CardGrid.jsx](src/components/features/CardGrid/CardGrid.jsx), [src/components/ui/Pagination/Pagination.jsx](src/components/ui/Pagination/Pagination.jsx)
+**SC:** 2.4.3 Focus Order
+**Status:** Fixed 2026-10-20. Found in a second audit (accessibility and QA agents) on 2026-10-19. **Test:** `App.test.jsx`, "moves focus to the results after changing page".
+
+While the next page loads, `CardGrid` shows only the skeleton, so `Pagination` and the focused button disappear and focus drops to `<body>`. Keyboard and screen reader users are sent back to the top of the page after every page change.
+
+**Fix:** Move focus to the results after the new page loads.
+
+**Fixed 2026-10-20:** `CardGrid` renders a visually hidden `<h2 tabIndex={-1}>` such as "Popular movies, page 2", and focuses it once the next page's data arrives (only after a page change, not on first load or a new search).
+
 ---
 
 ## Notes
 
 - ISSUE-10 is intentionally left out. The original report was lost, and the item couldn't be reconstructed.
 - Already in place (see [README.md](README.md#accessibility)): native `<dialog>` modal, `role="search"`, skip link target, labelled pagination with `aria-current`, accordion `aria-expanded`/`aria-controls`, and decorative poster images with `alt=""`.
-- All 10 issues were fixed on 2026-10-16. They still need the manual checks: keyboard-only use, VoiceOver, and a phone for ISSUE-02.
+- All 10 original issues were fixed on 2026-10-16. A second audit on 2026-10-19 found more; ISSUE-12 is fixed, and the rest (ISSUE-13 to 26) are listed as optional in the Audit Findings doc. They still need the manual checks: keyboard-only use, VoiceOver, and a phone for ISSUE-02.
 - The Playwright tests that verified these issues were removed on 2026-10-17 to make way for Vitest; they're in git history (`tests/wcag-issues.spec.js`). New tests for these fixes will use Vitest + React Testing Library.
